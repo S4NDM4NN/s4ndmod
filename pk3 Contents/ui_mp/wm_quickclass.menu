@@ -1,0 +1,604 @@
+#include "ui_mp/menudef.h"
+
+#define DEFAULT_TEXT_SCALE 0.25
+
+#define ORIGIN_QUICKCLASS	10 110
+
+{
+	menuDef {
+		name			"wm_quickclass"
+		visible			0
+		fullscreen		0
+		rect			0 100 640 380
+		focusColor		1 0 0 1
+		disablecolor	0 0 0 0
+		backcolor		0 0 0 0
+ 		style			WINDOW_STYLE_FILLED
+   		border			1
+
+		onOpen			{ setCvar cl_bypassMouseInput "1" }
+		onClose			{ setCvar cl_bypassMouseInput "0" }
+
+	itemDef {
+		name			window
+		visible			1
+		rect			0 0 170 170
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 1
+ 		style			WINDOW_STYLE_SHADER
+   		border			1
+		background		"ui_mp/assets/quickmessage_background.tga"
+		decoration
+	}
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			37 14 128 20
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		text			"Class"
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_CENTER
+		decoration
+	}
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 40 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"1. Soldier"
+		decoration
+	}
+	execKey "1" { close wm_quickclass; open wm_quicksoldier }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 56 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"2. Medic"
+		decoration
+	}
+	execKey "2" { close wm_quickclass; open wm_quickmedic }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 72 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"3. Engineer"
+		decoration
+	}
+	execKey "3" { close wm_quickclass; open wm_quickeng }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 88 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"4. Lieutenant"
+		decoration
+	}
+	execKey "4" { close wm_quickclass; open wm_quicklt}
+}
+
+{
+	menuDef {
+		name			"wm_quicksoldier"
+		visible			0
+		fullscreen		0
+		rect			0 100 640 380
+		focusColor		1 1 0 1
+		disablecolor	0 0 0 0
+		backcolor		0 0 0 0
+ 		style			WINDOW_STYLE_FILLED
+   		border			1
+		onOpen			{ setCvar cl_bypassMouseInput "1" }
+		onClose			{ setCvar cl_bypassMouseInput "0" }
+
+	itemDef {
+		name			window
+		visible			1
+		rect			0 0 170 170
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 1
+ 		style			WINDOW_STYLE_SHADER
+   		border			1
+		background		"ui_mp/assets/quickmessage_background.tga"
+		decoration
+	}
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			37 14 128 20
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 0 0 1
+		backcolor		0 0 0 0
+		text			"Soldier"
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_CENTER
+		decoration
+	}
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 40 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"1. MP40"
+		decoration
+	}
+	execKey "1" { exec "mp_playertype 0; mp_weapon 3;QuickClassMessage"; close wm_quicksoldier }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 56 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"2. Thompson"
+		decoration
+	}
+	execKey "2" { exec "mp_playertype 0; mp_weapon 4;QuickClassMessage"; close wm_quicksoldier }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 72 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"3. Sten"
+		decoration
+		group			ingamebox
+	}
+	execKey "3" { exec "mp_playertype 0; mp_weapon 5;QuickClassMessage"; close wm_quicksoldier }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 88 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"4. Sniper Rifle"
+		decoration
+	}
+	execKey "4" { exec "mp_playertype 0; mp_weapon 6;QuickClassMessage"; close wm_quicksoldier }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 104 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"5. FG42"
+		decoration
+	}
+
+	execKey "5" { exec "mp_playertype 0; mp_weapon 7;QuickClassMessage"; close wm_quicksoldier }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 120 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"6. Panzerfaust"
+		decoration
+		group			ingamebox
+	}
+	execKey "6" { exec "mp_playertype 0; mp_weapon 8;QuickClassMessage"; close wm_quicksoldier }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 136 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"7. Venom"
+		decoration
+		group			ingamebox
+	}
+	execKey "7" { exec "mp_playertype 0; mp_weapon 9;QuickClassMessage"; close wm_quicksoldier }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 152 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"8. Flamethrower"
+		decoration
+		group			ingamebox
+	}
+	execKey "8" { exec "mp_playertype 0; mp_weapon 10;QuickClassMessage"; close wm_quicksoldier }
+	
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 168 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"9. Shotgun"
+		decoration
+		group			ingamebox
+	}
+	execKey "9" { exec "mp_playertype 0; mp_weapon 11;QuickClassMessage"; close wm_quicksoldier }
+}
+
+{
+	menuDef {
+		name			"wm_quickmedic"
+		visible			0
+		fullscreen		0
+		rect			0 100 640 380
+		focusColor		1 1 0 1
+		disablecolor	0 0 0 0
+		backcolor		0 0 0 0
+ 		style			WINDOW_STYLE_FILLED
+   		border			1
+		onOpen			{ setCvar cl_bypassMouseInput "1" }
+		onClose			{ setCvar cl_bypassMouseInput "0" }
+
+	itemDef {
+		name			window
+		visible			1
+		rect			0 0 170 170
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 1
+ 		style			WINDOW_STYLE_SHADER
+   		border			1
+		background		"ui_mp/assets/quickmessage_background.tga"
+		decoration
+	}
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			37 14 128 20
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 0 0 1
+		backcolor		0 0 0 0
+		text			"Medic"
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_CENTER
+		decoration
+	}
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 40 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"1. MP40"
+		decoration
+	}
+	execKey "1" { exec "mp_playertype 1; mp_weapon 3;QuickClassMessage"; close wm_quickmedic }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 56 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"2. Thompson"
+		decoration
+	}
+	execKey "2" { exec "mp_playertype 1; mp_weapon 4;QuickClassMessage"; close wm_quickmedic }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 72 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"3. Sten"
+		decoration
+		group			ingamebox
+	}
+	execKey "3" { exec "mp_playertype 1; mp_weapon 5;QuickClassMessage"; close wm_quickmedic }
+
+}
+
+{
+	menuDef {
+		name			"wm_quickeng"
+		visible			0
+		fullscreen		0
+		rect			0 100 640 380
+		focusColor		1 1 0 1
+		disablecolor	0 0 0 0
+		backcolor		0 0 0 0
+ 		style			WINDOW_STYLE_FILLED
+   		border			1
+		onOpen			{ setCvar cl_bypassMouseInput "1" }
+		onClose			{ setCvar cl_bypassMouseInput "0" }
+
+	itemDef {
+		name			window
+		visible			1
+		rect			0 0 170 170
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 1
+ 		style			WINDOW_STYLE_SHADER
+   		border			1
+		background		"ui_mp/assets/quickmessage_background.tga"
+		decoration
+	}
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			37 14 128 20
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 0 0 1
+		backcolor		0 0 0 0
+		text			"Engineer"
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_CENTER
+		decoration
+	}
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 40 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"1. MP40"
+		decoration
+	}
+	execKey "1" { exec "mp_playertype 2; mp_weapon 3;QuickClassMessage"; close wm_quickeng }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 56 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"2. Thompson"
+		decoration
+	}
+	execKey "2" { exec "mp_playertype 2; mp_weapon 4;QuickClassMessage"; close wm_quickeng }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 72 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"3. Sten"
+		decoration
+		group			ingamebox
+	}
+	execKey "3" { exec "mp_playertype 2; mp_weapon 5;QuickClassMessage"; close wm_quickeng }
+	
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 88 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"4. FG42"
+		decoration
+		group			ingamebox
+	}
+	execKey "4" { exec "mp_playertype 2; mp_weapon 7;QuickClassMessage"; close wm_quickeng }	
+	
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 104 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"5. Shotgun"
+		decoration
+		group			ingamebox
+	}
+	execKey "5" { exec "mp_playertype 2; mp_weapon 11;QuickClassMessage"; close wm_quickeng }
+}
+
+{
+	menuDef {
+		name			"wm_quicklt"
+		visible			0
+		fullscreen		0
+		rect			0 100 640 380
+		focusColor		1 1 0 1
+		disablecolor	0 0 0 0
+		backcolor		0 0 0 0
+ 		style			WINDOW_STYLE_FILLED
+   		border			1
+		onOpen			{ setCvar cl_bypassMouseInput "1" }
+		onClose			{ setCvar cl_bypassMouseInput "0" }
+
+	itemDef {
+		name			window
+		visible			1
+		rect			0 0 170 170
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 0 0 1
+		backcolor		0 0 0 1
+ 		style			WINDOW_STYLE_SHADER
+   		border			1
+		background		"ui_mp/assets/quickmessage_background.tga"
+		decoration
+	}
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			37 14 128 20
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 1 1
+		backcolor		0 0 0 0
+		text			"Lieutenant"
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_CENTER
+		decoration
+	}
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 40 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"1. MP40"
+		decoration
+	}
+	execKey "1" { exec "mp_playertype 3; mp_weapon 3;QuickClassMessage"; close wm_quicklt }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 56 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"2. Thompson"
+		decoration
+	}
+	execKey "2" { exec "mp_playertype 3; mp_weapon 4;QuickClassMessage"; close wm_quicklt }
+
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 72 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"3. Sten"
+		decoration
+		group			ingamebox
+	}
+	execKey "3" { exec "mp_playertype 3; mp_weapon 5;QuickClassMessage"; close wm_quicklt }
+	itemDef {
+		name			"window"
+		visible			1
+		rect			10 88 128 16
+		origin			ORIGIN_QUICKCLASS
+		forecolor		1 1 0 1
+		backcolor		0 0 0 0
+		textfont	UI_FONT_NORMAL
+		textscale	.25
+		textalign		ITEM_ALIGN_LEFT
+		text			"4. Shotgun"
+		decoration
+		group			ingamebox
+	}
+	execKey "5" { exec "mp_playertype 3; mp_weapon 11;QuickClassMessage"; close wm_quicklt }
+}
+

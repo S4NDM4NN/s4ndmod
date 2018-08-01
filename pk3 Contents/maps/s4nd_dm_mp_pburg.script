@@ -1,0 +1,180 @@
+//
+//Brush Scripting
+//Map: mp_burg
+//Last edited by: William
+//
+
+game_manager
+{
+	spawn
+	{
+		// Set scenario information
+
+		wm_mapdescription		"Allied forces are attempting to steal the secret documents from an Axis headquarters."
+
+		// Set the respawn times
+
+		wm_allied_respawntime		25
+		wm_axis_respawntime			25
+
+		wm_set_round_timelimit		9
+
+		// Set the number of objectives for the map
+
+		wm_number_of_objectives		4
+
+		// Axis control all objectives at the start (0 == AXIS, 1 == ALLIED)
+		wm_set_objective_status		1	0
+		wm_set_objective_status		2	0
+		wm_set_objective_status		3	0
+		wm_set_objective_status		4	-1
+
+		wm_objective_allied_desc	1	"Secondary Objective:**Breach the courtyard wall."
+		wm_objective_allied_desc	2	"Primary Objective:**Steal the secret documents!"
+		wm_objective_allied_desc	3	"Primary Objective:**Get to the lander and escape with the secret documents."
+		wm_objective_allied_desc	4	"Secondary Objective:**Capture the courtyard."
+		wm_objective_axis_desc		1	"Primary Objective:**Hold off the Allied attack."
+		wm_objective_axis_desc		2	"Primary Objective:**Prevent Allies from stealing the secret documents."
+		wm_objective_axis_desc		3	"Primary Objective:**Stop the Allies before they escape with the secret documents."
+		wm_objective_axis_desc		4	"Secondary Objective:**Hold the courtyard."
+
+		wm_overview_image			"video/mp_pburg.roq"
+		wm_objective_image			1	"gfx/2d/mp_objectives/burg_obj_1.jpg"
+		wm_objective_image			2	"gfx/2d/mp_objectives/burg_obj_3.jpg"
+		wm_objective_image			3	"gfx/2d/mp_objectives/burg_obj_4.jpg"
+		wm_objective_image			4	"gfx/2d/mp_objectives/burg_obj_2.jpg"
+
+		// SHORT DESCRIPTIONS
+		wm_objective_short_axis_desc	1	"Defend the Courtyard Wall"
+		wm_objective_short_axis_desc	2	"Defend the secret documents!"
+		wm_objective_short_axis_desc	3	"Stop the Allies from Stealing"
+		wm_objective_short_axis_desc	4	"Hold the courtyard"
+		wm_objective_short_allied_desc	1	"Destroy the Courtyard Wall"
+		wm_objective_short_allied_desc	2	"Steal the secret documents!"
+		wm_objective_short_allied_desc	3	"Escape with the secret documents."
+		wm_objective_short_allied_desc	4	"Capture the courtyard"
+
+		// Set Defending Team for SW Mode
+
+		wm_set_defending_team	0
+
+		// If the round timer expires, the Axis have won, so set the current winning team
+		// Set the round winner:  0 == AXIS, 1 == ALLIED
+		wm_setwinner 0
+
+		// Accum #1 will be the state of objective number one
+		accum 1 set 0
+		// Accum #2 is set after either wall is breached, so that the sirens are set only once
+		accum 2 set 0
+	}
+
+	trigger objective1
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Allied takes control of objective #1
+		wm_set_objective_status		1	1
+
+		// UI pop-up to alert players
+		wm_announce	"The Courtyard Wall has been breached!"
+
+		//turn on sirens
+		accum 2 abort_if_not_equal 0
+		//alertentity siren_relay
+		accum 2 set 1
+
+	}
+
+	trigger objective2
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Allied takes control of objective #1
+		wm_set_objective_status		3	1
+
+		// Change the variable within the script so that we can check if someone wins the round
+		accum 1 set 1
+
+		// UI pop-up to alert players
+		wm_announce	"Allies escaped with the secret docs!"
+
+		// Call function to check if the round has been won
+		trigger game_manager checkgame
+	}
+
+	trigger axis_object_stolen
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Allied have stolen the documents (0 == AXIS, 1 == ALLIED)
+		wm_set_objective_status		2	1
+	}
+
+	trigger axis_object_returned
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Axis have returned the documents (0 == AXIS, 1 == ALLIED)
+		wm_set_objective_status		2	0
+	}
+
+	trigger checkgame
+	{
+		accum 1 abort_if_not_equal 1
+
+		// Set the round winner:  0 == AXIS, 1 == ALLIED
+		wm_setwinner 1
+
+		// End the round
+		wm_endround
+	}
+
+	trigger beach_flagblue
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Allied takes control of checkpoint #1
+		wm_set_objective_status		4	1
+
+		// Some kind of UI pop-up to alert players
+		wm_announce	"Allies capture the Courtyard!"
+	}
+
+	trigger beach_flagred
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Axis takes control of checkpoint #1
+		wm_set_objective_status		4	-1
+
+		// Some kind of UI pop-up to alert players
+		wm_announce	"Axis reclaims the Courtyard!"
+	}
+
+}
+
+
+allied_obj1 //Courtyard wall breached.
+{
+	spawn
+	{
+		remove
+	}
+}
+
+allied_obj2 //The gold being stolen.
+{
+	spawn
+	{
+		remove
+	}
+}
+
+beach_flag
+{
+	spawn
+	{
+		remove
+	}
+}
+flag_respawn_base
+{
+	spawn
+	{
+		remove
+	}
+}

@@ -1,0 +1,72 @@
+// This script contains functionality to ignore spies if they arent close enough
+
+// These parameters are required
+this.Name = "CheckSpy";		// The name of the goal.
+this.Parent = "LowLevel";		// The name of the parent. This setting determines where in the state tree the goal will reside in.
+this.GetPriorityDelay = 1;
+this.LimitToTargetEntityFlag( ENTFLAG.DISGUISED );
+
+this.Initialize = function()
+{
+	if (!Map )
+		{ global Map = table(); }
+		
+	// get a table of the primary goals in the current map
+	// and then cache their positions if the table hasn't been set up yet
+	if (!Map.PrimaryGoalPositions )
+	{ 
+		Map.PrimaryGoalPositions = table(); 
+			
+		gt = {};
+		GetGoals( gt, 0, ".*" );
+
+		foreach ( id and goal in gt )
+		{
+			i = tableCount( Map.PrimaryGoalPositions );
+			n = goal.GetName();
+			
+			foreach ( type in this.PrimaryGoalTable )
+			{
+				if ( n.Find(type) == 0 )
+				{
+					p = goal.GetPosition();
+					Map.PrimaryGoalPositions[i] = table();
+					Map.PrimaryGoalPositions[i].position = p;
+				}
+			}
+		}
+	}
+};
+
+this.PrimaryGoalTable = 
+{
+	"PLANT",
+	"DEFUSE",
+	"CHECKPOINT",
+	"CAPPOINT",
+	"FLAG",
+};
+
+this.GetPriority = function()
+{
+	nearObj = false;
+	t = this.Bot.GetTarget();
+	// if they are close to a primary goal, just have the bots shoot them
+	foreach ( id in Map.PrimaryGoalPositions )
+	{
+		if ( DistanceBetween(t, id.position) < 1000 )
+		{
+			nearObj = true;
+			break;
+		}
+	}
+
+	// increase odds of shooting with decreased distance to target
+	// at 150 or less, they will always shoot
+	if ( !nearObj && RandInt(0, ToInt(this.Bot.DistanceTo(t))) > 150 )
+	{
+		this.Bot.IgnoreTarget( t, 5 );
+	}
+};
+
+

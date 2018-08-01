@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cgame", "cgame\cgame_vs2010.vcxproj", "{0247E07A-946D-459C-A065-55A85152AAA0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game", "game\game_vs2010.vcxproj", "{688E382E-9C19-4296-8382-B58D301A2ED9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ui", "ui\ui_vs2010.vcxproj", "{B574C445-D433-427B-801A-518A29AD2BA4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Global-Omni-Debug|Win32 = Global-Omni-Debug|Win32
+		Global-Omni-Release|Win32 = Global-Omni-Release|Win32
+		Omnibot-Debug|Win32 = Omnibot-Debug|Win32
+		Omnibot-Release|Win32 = Omnibot-Release|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Debug|Win32.Build.0 = Debug|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Global-Omni-Debug|Win32.ActiveCfg = Global-Omni-Debug|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Global-Omni-Debug|Win32.Build.0 = Global-Omni-Debug|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Global-Omni-Release|Win32.ActiveCfg = Global-Omni-Release|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Global-Omni-Release|Win32.Build.0 = Global-Omni-Release|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Omnibot-Debug|Win32.ActiveCfg = Omnibot-Debug|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Omnibot-Debug|Win32.Build.0 = Omnibot-Debug|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Omnibot-Release|Win32.ActiveCfg = Omnibot-Release|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Omnibot-Release|Win32.Build.0 = Omnibot-Release|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Release|Win32.ActiveCfg = Release|Win32
+		{0247E07A-946D-459C-A065-55A85152AAA0}.Release|Win32.Build.0 = Release|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Debug|Win32.Build.0 = Debug|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Global-Omni-Debug|Win32.ActiveCfg = Global-Omni-Debug|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Global-Omni-Debug|Win32.Build.0 = Global-Omni-Debug|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Global-Omni-Release|Win32.ActiveCfg = Global-Omni-Release|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Global-Omni-Release|Win32.Build.0 = Global-Omni-Release|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Omnibot-Debug|Win32.ActiveCfg = Omnibot-Debug|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Omnibot-Debug|Win32.Build.0 = Omnibot-Debug|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Omnibot-Release|Win32.ActiveCfg = Omnibot-Release|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Omnibot-Release|Win32.Build.0 = Omnibot-Release|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Release|Win32.ActiveCfg = Release|Win32
+		{688E382E-9C19-4296-8382-B58D301A2ED9}.Release|Win32.Build.0 = Release|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Debug|Win32.Build.0 = Debug|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Global-Omni-Debug|Win32.ActiveCfg = Global-Omni-Debug|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Global-Omni-Debug|Win32.Build.0 = Global-Omni-Debug|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Global-Omni-Release|Win32.ActiveCfg = Global-Omni-Release|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Global-Omni-Release|Win32.Build.0 = Global-Omni-Release|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Omnibot-Debug|Win32.ActiveCfg = Omnibot-Debug|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Omnibot-Debug|Win32.Build.0 = Omnibot-Debug|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Omnibot-Release|Win32.ActiveCfg = Omnibot-Release|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Omnibot-Release|Win32.Build.0 = Omnibot-Release|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Release|Win32.ActiveCfg = Release|Win32
+		{B574C445-D433-427B-801A-518A29AD2BA4}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

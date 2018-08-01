@@ -1,0 +1,189 @@
+0.9 - 15 Jan 04
+===============
+- Fix: issue with using scrollbar in browser sometimes launches the game
+- Fix: longstanding wolf bug where arty/airstrikes can damage/kill through roofs/walls
+       (i.e. forward bunker on beach)
+- Fix: Can no longer pick up ammo packs if all banks are full of ammo
+- Fix: Lean is now properly shown in multiview
+- Fix: Various UI issues with alternate languages
+- Change: "\kill" now counts as a death in stats
+- Change: GS in game stats changed to "Gib" for # of bodies gibbed (also shown in +wstats)
+- Change: Made cl_timenudge a latch variable
+- Change: Clean up of the multiview interface
+	- Windows-like controls (point and click)
+	- Drop-down listings to show/hide players currently being multiviewed
+	- Full support in demo playback
+- Add: Average ping of teams shown above ping column
+- Add: Spectator ping shown on the scoreboard
+- Add: UI updates to various components in the main UI (blender, hyperlinks, credits, etc.)
+- Add: mod name to the listed gametype in the server browser
+- Add: Health pack drop/used stats (also in topshots w/15 drop minimum)
+- Add: Ammo pack drop/used stats (also in topshots w/15 drop minimum)
+- Add: Revival stats (# of times a player revived someone on their team)
+- Add: Muzzle flash option (cg_muzzleFlash 0=off, 1=on, default=1)
+- Add: Ammo remaining on crosshair name (only for weapons with real ammo)
+       --> cg_drawcrosshairnames: 0 - none, 1-On-All, 2-On-NoAmmo
+- Add: chat beep options (cg_chatbeep - 0/none, 1/all, 2/teamchat only)
+       --> Different tones for normal and team chat
+- Add: Teammates who are dead but revivable are shown with a "*" to the left of their
+       class/name on the team overlay.
+- Add: Replaced unbound commands displaying "???" with "[command_name]" so you
+       can tell what the actual command for the bind supposed to be.
+- Add: "ready" status shown (on the scoreboard) for players in warmup:
+	- red "?" = not ready
+	- green "!" = ready
+- Add: Demo player:
+	- Dir listing/navigation
+	- Double-click to expand dir
+	- Double-click to load a demo
+	- On/off button for timedemo
+- Add: option to ignore players:
+	- ignore <id|axis|allies|specs|all>
+		- no <id> gives usage + current ignore list
+		- <id> of -1 means ignore all
+	- ignore_remove <id|axis|allies|specs|all>
+		- <id> of -1 removes all ignores
+
+0.83 - 19 Mar 03
+================
+- Fix: Mouse sensitivity issues with multiview
+- Fix: Player view won't snap randomly after coming out of a pause
+- Fix: Several internal UI fixups
+- Fix: Zoomed with binocs and switching weapons will no longer stop the sway
+- Fix: Weapon dropping while scoped with a sniper-rifle issues
+- Fix: Leaning/water exploits to get around weapon warmup times (panzer/venom)
+- Fix: Grenade explode on touch from dead players (thx Bani!)
+- Fix: Team locks follow on team swaps (voted or next round)
+- Fix: "zombied" players for slow-loading clients on map change (thx Bani!)
+- Fix: RT / respawn message were partially overlapping
+- Fix: Invisible flamethrower flames (thx Bani!)
+- Fix: Random weirdo player model leans (thx Bani!)
+- Fix: Server crashing exploit
+- Update: All alternate language UI
+- Add: Macintosh build + installer (thanks CannonFodder!)
+- Add: Server-side configurable centerview toggle (server_allowCenterview)
+- Add: vote_allow_centerview (server-side toggling of centerview voting option)
+- Add: callvote centerview - allows toggling the client "centerview" command on/off
+  Remember, even if the vote for this option is disabled, you can always issue:
+		\callvote centerview
+  (with no parameters) to see the current server setting.  This applies to ANY
+  callvote option :p
+
+0.82a - 13 Nov 02
+=================
+- Fix: Stats bugs
+
+0.82 - 12 Nov 02
+================
+- Fix: Resolution bug and fonts at 1280x1024
+- Fix: Possible client crash if autoaction is enabled
+- Fix: Small MV exploit
+- Fix: Erroneous limit of 16 raised to 32 for client IDs on MV
+- Fix: Artillary kill stats
+- Fix: False dead player animations with antilag
+- Fix: Player warpings with antilag
+- Fix: Occassional carry-over of stats when they should be wiped
+- Change: Shot attempts no longer counted when gibbing bodies
+- Change: Drop of objective is now straight down rather than
+  "tossed" to stop through-barrier exploits.
+- Change: Removed a ton of single-player/bot code from the server
+  to reduce overall size and give some performance enhancements
+- Remove: Complaint popup in demos
+- Add: All 1.4 updates minus some UI additions
+- Add: forcefps <value> command to bypass com_maxfps latch
+- Add: "\mvnone" command to remove all active MV clients
+- Add: Separate MV list into teams with team flags at the top of each list
+- Add: Ability to set transparency of hit "splats"
+       (cg_bloodDamageBlend - values 0.0-1.0)
+
+0.8 - 27 Oct 02
+===============
+- Fix: Occasional lockout on respawn during warmup
+- Fix: Small warmup bug when changing warmup limits
+- Fix: Spectator inactivity check
+- Fix: Small tweak to speclock
+- Fix: Sniper/binoc zooms in demos
+- Fix: MOTD not showing up after initial server load
+- Fix: Autoswitch after panzer/smoke grenade is fired
+- Fix: Autoscreenshot/demo name if in limbo
+- Fix: Priming a grenade and dropping your weapon no longer means "can't use any weapons anymore"
+- Fix: LT exploit to get soldier loadouts on default team SMG
+- Fix: Don't autoaction on a demo
+- Change: No longer able to send a DynamitePlanted or DynamiteDefused vchat globally :p
+- Add: Multiview support.  Check the osp-wolf-Multiview.txt doc for complete info.
+- Add: Democast support. Check the osp-wolf-Democast.txt doc for complete info.
+- Add: mv_sensitivity (Multiview mouse sensitivity, default=20)
+- Add: cg_printObjectiveInfo cvar for printing objective information in the console.
+- Add: cg_crosshairColor/cg_crossharColorAlt, cg_crosshairAlpha/cg_crosshairColorAlphaAlt
+- Add: panzer banning (-1 none, 0 and up = # of active panzers allowed) - team_maxPanzers (default = -1)
+- Add: UI support for new options (Options and Commands)
+- Add: Can use mousewheelup/down to scroll a zoomed view (in a player/follow demo)
+- Add: +vstr support. Check the ClientReadme on usage info.
+- Add: 2 new fonts for the cgame: ch_font 0|1|2 (0 = default)
+- Add: weapon icon flashing (cg_drawWeaponIconFlash) 0=off (default)
+	- red = shooting
+	- yellow = reloading
+	- white = switching
+- Add: 24 more color codes:
+	- 8, 9, <, >, =, ?, :, ;, @, A-O (in caps)
+	- remember to prepend these with a "^" :p
+- Add: More server-side logging:
+	Dynamite_Diffuse: <player_id>
+	Dynamite_Plant: <player_id>
+	Repair: <player_id>
+	Medic_Revive: <medic_id> <revived_player_id>
+	Objective_Destroy: <player_id> <bonus>
+	Ammo_Pack: <issuing_player_id> <receiving_player_id>
+	Health_Pack: <issuing_player_id> <receiving_player_id>
+
+0.3 - 10 Aug 02
+===============
+- Fix: changing g_warmup while countdown is already going wont change the info to the clients
+- Fix: cg_noAmmoAutoSwitch and cg_autoload combination weirdness
+- Fix: can report wrong win info in console if VERY close to timelimit
+- Fix: some compsettings values
+- Fix: Various pause issues (thanks to MentholMoose)
+- Fix: speclock blackouts honored in the UI as well
+- Fix: specs get thrown to 1st person randomly (roughly 30s intervals)
+- Fix: Crasher on mp_rocket
+- Fix: Occasional locked scoreboard while in a demo
+- Change: Updated example configs with latest settings (comp and pub)
+- Change: goat sound to only attacker/victim
+- Change: Leaning now considered as an "active" movement wrt inactivity
+- Change: No clamp on com_maxfps
+- Change: server_compsettings to server_autoconfig
+	0 - All settings are manual
+	1 - Competition settings for the sepecified g_gametype are loaded on startup
+	2 - Public server settings for the sepecified g_gametype are loaded on startup
+- Add: sever cvar info (team info)
+- Add: server logging - weapon stats (osp-wold-StatsInfo.txt)
+- Add: document server settings (for server_autoconfig)
+- Add: Toggling of blood flashes when taking damage (cg_bloodflash)
+- Add: option to disable announcer (cg_announcer)
+- Add: shuffle teams command (callvote shuffleteams)
+- Add: pub server callvote (vote_allow_pub)
+- Add: Document stats info (osp-wolf-StatsInfo.txt)
+- Add: topshots/bottomshots command (also on a per weapon basis)
+- Add: Server motd: server_motd0 - server_motd7.  First NULL ("") terminates
+- Add: +wstats (windowed \stats) - scalable font size: cf_wstats
+- Add: +wtopshots (windowed \topshots) - scalable font size: cf_wtopshots
+- Add: window prompts at bottom of scoreboard during intermission
+- Add: Time info at the top right of the scoreboard
+- Add: statsdump - dumps current weapon/gamestats to a .txt file in the osp/stats/ dir
+- Add: autoaction: performs automatic actions at particular points in the game:
+	- statsdump - at the end of a round
+	- autorecord - at the beginning of a round/set
+	- autoscreenshot - at the end of a round
+- Add: additional vote settings: vote_allow_nextmap, vote_allow_swapteams
+
+0.22 - 15 Jun 02
+================
+- Various updates
+
+0.21 - 02 Jun 02
+================
+- Various updates
+
+0.2 - 01 Jun 02
+================
+- Initial release

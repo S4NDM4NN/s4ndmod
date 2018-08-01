@@ -1,0 +1,144 @@
+OSP for Wolfenstein - Democast Support
+======================================
+Version: 0.8
+Date:    27 Oct 02
+Contact: rhea@OrangeSmoothie.org
+Site:    http://www.OrangeSmoothie.org
+
+
+So what exactly is a "Democast"?  Basically, it is nothing more than
+a demo that has been synced with its corresponding Shoutcast.  OSP
+provides the means by which to automatically load and play the synchro-
+nized shoutcast with the demo.
+
+
+======================
+How to play a democast
+======================
+If the democast is created properly, you will need to do the following:
+
+1. Get the democast (normally a .pk3) and place it in your osp/ directory.
+
+2. Issue (from the command line... DOS Shell):
+	
+	wolfmp +set fs_game osp +exec <exec= name in the pk3's filename>
+
+3. Wolf will start up, load the map, and then decode the MP3.  This
+   can take a while.  You will also need anywhere from 10x to 20x the size
+   of the original mp3 for disk space.
+
+4. After conversion, and everything goes well, the demo will start with
+   the mp3 playing in the background.
+
+5. In-game sound volume is set with: s_volume  (0.1-0.2 is ideal)
+
+6. The .mp3 playback volume is set with: s_musicvolume  (0.7-0.8 is ideal)
+
+7. All conversions are stored in the osp/convert/ directory.  OSP will search
+   this directory for a previously decoded .mp3 during playback so it won't
+   have to reconvert the .mp3.  If you don't plan on playing the democast again,
+   you can delete the conversions to free up some disk space.
+
+If something goes wrong (i.e. the mp3 does not play):
+-----------------------------------------------------
+1. You must have enough diskspace!!  An 11M .mp3 will decode to around 230M,
+   as an example.  You have been warned!!!
+
+2. The democast specified the wrong .mp3 or demo to play back.  Open up the
+   .pk3 and take a look at the included .cfg, .mp3, and demo names.
+
+3. The democast used the wrong .mp3 format.  You can see if this is the problem
+   by pulling down your console and looking at any error messages after OSP
+   has been loaded.  Errors like: "mp3dec: [blah] not supported", are general
+   indications of this.
+
+4. You don't have enough ram on your machine to play the converted mp3.  You
+   will need at least the size of the wav itself for ram, plus everything else
+   running on your system.  Wolf must load this .wav entirely into ram before
+   it can be played (apparently, virtual ram does not count).
+
+
+If the included .cfg is wrong or missing:
+-----------------------------------------
+The simplest thing to do if you have only the mp3 and the demo (in demo/) is
+to issue:
+
+	wolfmp +set fs_game osp +set mp3_file [.mp3 name WITHOUT the trailing .mp3 suffix] +demo [demoname]
+
+If you want to be more fancy, grab a .cfg from another democast, or check out
+the info below for democast creators.
+
+
+
+
+========================
+How to CREATE a Democast
+========================
+Creating a democast is pretty simple.  It requires 3 components:
+
+1. The demo itself (duh)
+2. The .mp3 synced to the start of the demo (and in a compatible format)
+3. A config that democast players can exec
+
+All of this should be bundled in a single .pk3.  The layout in the pk3
+should be as follows:
+
+	<demoname>.cfg
+	<demoname>.mp3
+	demo/demo-<demoname>.dm_59
+
+As a note from the above layout, the demo name should NOT be the same
+name as the config that clients will exec when launching the democast.
+People have the tendency to issue "+demo" instead of "+exec", resulting
+in playing the demo without the mp3.
+
+The name of the democast should be as follows:
+
+	[DC]-<some_descriptive_info>...exec=<demoname>.pk3
+
+This format allows users to recognize that the pk3 contains a democast
+(from the [DC] prefix), along with the name of the .cfg contained in the
+.pk3 to exec to get the democast started.
+
+
+<demoname>.cfg :
+----------------
+The format of the recommended config is given below:
+
+	// Necessary for reading .mp3 files
+	set sv_pure 0
+
+	// mp3 to decode -- NO EXTENSIONS!!!
+	set mp3_file <mp3_filename>
+
+	// Sound settings
+	set cg_announcer 1
+	set com_soundmegs 24
+	set s_volume 0.2
+	set s_musicvolume 0.7
+
+	// Demo to sync the mp3 with
+	demo demo-<demoname>
+
+Note: Replace actual filenames with those listed above in <>.
+      DO *NOT* include the "<" and ">" characters!!
+
+Note2: Make sure to *NOT* include the .mp3 extention on the mp3
+       file that you specify.  It won't work if you do :p
+
+
+<demoname>.mp3:
+---------------
+The mp3 convertor in OSP will only convert mp3s of a particular type.
+Also of note is that the sampling rate of the mp3 directly dictates
+the size of the resultant .wav that is play in the demo.  An 11khz
+mp3 conversion is 1/4 the size of a 44khz mp3.
+
+The pickiness of the convertor and the engine dictates that the mp3s
+must be in 2.5 layer, 16-bit 11/22/44kHz stereo.
+
+
+demo/demo-<demoname>.dm_59:
+---------------------------
+Only thing to note here is from the previous recommendation where the
+name of the demo should NOT be the same name as the democast .cfg file.

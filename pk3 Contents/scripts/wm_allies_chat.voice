@@ -1,0 +1,260 @@
+male
+
+// American voices
+AllClear
+{
+	sound/multiplayer/allies/a-all_clear.wav	"All clear."
+}
+
+FireInTheHole
+{
+	sound/multiplayer/allies/a-fire_in_the_hole.wav		"Fire in the hole!"
+}
+
+HoldYourFire
+{
+	sound/multiplayer/allies/a-hold_fire.wav	"Hold your fire!"
+}
+
+LetsGo
+{
+	sound/multiplayer/allies/a-lets_go.wav	"Lets go."
+}
+
+Medic
+{
+	sound/multiplayer/allies/a-medic1.wav	"Medic!"	sprites/voiceMedic
+}
+
+OnDefense
+{
+	sound/multiplayer/allies/a-on_defense.wav	"I'm on defense."
+}
+
+OnOffense
+{
+	sound/multiplayer/allies/a-on_offense.wav	"I'm on offense."
+}
+
+// NEW STUFF
+Affirmative
+{
+	sound/multiplayer/allies/a-affirmative.wav "Affirmative."
+}
+
+Negative
+{
+	sound/multiplayer/allies/a-negative.wav "Negative."
+}
+
+NeedAmmo
+{
+	sound/multiplayer/allies/a-ammo.wav "I need ammo!"	sprites/voiceAmmo
+}
+
+NeedBackup
+{
+	sound/multiplayer/allies/a-backup.wav "I need backup!"
+}
+
+CoverMe
+{
+	sound/multiplayer/allies/a-cover_me.wav "Cover me!"
+}
+
+Incoming
+{
+	sound/multiplayer/allies/a-incoming.wav "Incoming!"
+}
+
+IamEngineer
+{
+	sound/multiplayer/allies/a-engineer.wav "I'm an engineer."
+}
+
+IamMedic
+{
+	sound/multiplayer/allies/a-medic.wav "I'm a medic."
+}
+
+IamLieutenant
+{
+	sound/multiplayer/allies/a-lt.wav "I'm a lieutenant."
+}
+
+IamSoldier
+{
+	sound/multiplayer/allies/a-soldier.wav "I'm a soldier."
+}
+
+// MORE NEW STUFF - Added by Brandon
+
+Bye
+{
+	sound/multiplayer/allies/a-bye1.WAV "Bye."
+	sound/multiplayer/allies/a-bye2.WAV "Bye."
+}
+
+ClearPath
+{
+	sound/multiplayer/allies/a-clearpath1.WAV "Clear the path!"
+}
+
+DefendObjective
+{
+	sound/multiplayer/allies/a-defendobj1.WAV "Defend our objective!"
+}
+
+DisarmDynamite
+{
+	sound/multiplayer/allies/a-disarm1.WAV "Disarm the dynamite!"
+}
+
+EnemyWeak
+{
+	sound/multiplayer/allies/a-enemyweak1.WAV "The enemy is weakened."
+}
+
+FollowMe
+{
+	sound/multiplayer/allies/a-followme1.WAV "Follow me."
+}
+
+GoodGame
+{
+	sound/multiplayer/allies/a-goodgame1.WAV "Good game."
+}
+
+GreatShot
+{
+	sound/multiplayer/allies/a-greatshot1.WAV "Great shot."
+}
+
+Hi
+{
+	sound/multiplayer/allies/a-hi1.WAV "Hi."
+	sound/multiplayer/allies/a-hi2.WAV "Hi."
+	sound/multiplayer/allies/a-hi3.WAV "Hi."
+}
+
+Move
+{
+	sound/multiplayer/allies/a-move1.WAV "Move!"
+}
+
+NeedEngineer
+{
+	sound/multiplayer/allies/a-needeng1.WAV "We need an engineer!"
+}
+
+Oops
+{
+	sound/multiplayer/allies/a-oops1.WAV "Oops."
+}
+
+PathCleared
+{
+	sound/multiplayer/allies/a-pathclear1.WAV "Path cleared."
+}
+
+Sorry
+{
+	sound/multiplayer/allies/a-sorry1.WAV "Sorry."
+}
+
+TakingFire
+{
+	sound/multiplayer/allies/a-takingfire1.WAV "Taking fire!"
+}
+
+Thanks
+{
+	sound/multiplayer/allies/a-thanks1.WAV "Thanks."
+}
+
+Welcome
+{
+	sound/multiplayer/allies/a-welcome1.WAV "You're welcome."
+}
+
+WhereTo
+{
+	sound/multiplayer/allies/a-whereto1.WAV "Where to?"
+}
+
+Cheer
+{
+	sound/multiplayer/allies/a-yeah1.WAV "Yeah!"
+	sound/multiplayer/allies/a-yeah2.WAV "Yeah!"
+	sound/multiplayer/allies/a-yeah3.WAV "WOOHOOO!"
+	sound/multiplayer/allies/a-yeah4.WAV "Woohooo!"
+	sound/multiplayer/allies/a-yeah5.WAV "YEE-HAW!"
+}
+
+// S4NDMoD Stuff
+// If you want to make your own soundpack, just follow the examples
+EnemyDisguise
+{
+	sound/multiplayer/allies/10a.wav "Enemy in disguise."
+	sound/multiplayer/allies/10b.wav "Enemy in disguise."
+}
+
+MinesCleared
+{
+	sound/multiplayer/allies/19a.wav "Mines cleared."
+	sound/multiplayer/allies/19b.wav "Mines cleared."
+}
+
+ClearMines
+{
+	sound/multiplayer/allies/37a.wav "Clear the mines."
+	sound/multiplayer/allies/37b.wav "Clear the mines."
+}
+
+Attack
+{
+	sound/multiplayer/allies/98a.wav "Attack!"
+	sound/multiplayer/allies/98b.wav "Attack!"
+}
+
+Fallback
+{
+	sound/multiplayer/allies/99a.wav "Fallback!"
+	sound/multiplayer/allies/99b.wav "Fallback!"
+}
+
+HealSquad
+{
+	sound/multiplayer/allies/921a.wav "Heal the squad."
+	sound/multiplayer/allies/921b.wav "Heal the squad."
+}
+
+ReviveTeammate
+{
+	sound/multiplayer/allies/923a.wav "Revive Teammate."
+	sound/multiplayer/allies/923b.wav "Revive Teammate."
+}
+
+DestroyObjective
+{
+	sound/multiplayer/allies/931a.wav "Destroy the Objective!"
+	sound/multiplayer/allies/931b.wav "Destroy the Objective!"
+}
+
+DeployMines
+{
+	sound/multiplayer/allies/934a.wav "Deploy landmines."
+	sound/multiplayer/allies/934b.wav "Deploy landmines."
+}
+
+CallAirstrike
+{
+	sound/multiplayer/allies/941a.wav "Call an airstrike."
+	sound/multiplayer/allies/941b.wav "Call an airstrike."
+}
+
+CallArtillery
+{
+	sound/multiplayer/allies/942a.wav "Call in artillery."
+	sound/multiplayer/allies/942b.wav "Call in artillery."
+}

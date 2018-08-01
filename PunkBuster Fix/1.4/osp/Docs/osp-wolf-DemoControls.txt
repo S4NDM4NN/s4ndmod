@@ -1,0 +1,90 @@
+OSP for Wolfenstein - Demo Controls
+===================================
+Version: 0.9
+Date:    30 Dec 02
+Contact: rhea@OrangeSmoothie.org
+Site:    http://www.OrangeSmoothie.org
+
+
+Demo playback under OSP rebinds all keys to a static layout.  By doing
+this, OSP is able to take over all key handling to support features in
+demos specific to OSP.  However, this means that all binds that you may
+have used before in demo playback will no longer function properly.
+
+The benefit in all this is that demos will no longer "crap out" if you
+accidentally hit the wrong key.  You can safely view scores, for instance.
+AVI recording facilities are also available.
+
+Every attempt has been made to accomodate the most used features/settings
+in demo playback, but if there is something missing in the command list
+given below, drop me an email.  I'll try to get your request in the next
+release.
+
+
+Key Mappings:
+-------------
+//
+// Misc.
+//
+ESC (escape): Releases the OSP keyboard configuration to normal demo
+              playback format.  Not needed unless you plan to exit the
+              demo (2 key presses are needed).
+
+BACKSPACE: Toggle demo control info window on/off
+
+TAB: View current scoreboard
+
+MWHEELDOWN + SHIFT: Zooms out a zoomed view *if* the demo is a first-person
+                    or following demo (doesn't work for MV demos).
+
+MWHEELUP + SHIFT: Zooms in a zoomed view *if* the demo is a first-person
+                  or following demo (doesn't work for MV demos).
+
+
+//
+// AVI recording controls
+//
+F1:  "cl_avidemo" setting (uses cvar "demo_avifpsF1" - default 0 [OFF])
+F2:  "cl_avidemo" setting (uses cvar "demo_avifpsF2" - default 10)
+F3:  "cl_avidemo" setting (uses cvar "demo_avifpsF3" - default 15)
+F4:  "cl_avidemo" setting (uses cvar "demo_avifpsF4" - default 20)
+F5:  "cl_avidemo" setting (uses cvar "demo_avifpsF5" - default 24)
+
+
+//
+// Timescale controls
+//
+SPACE:
+KEYPAD 5:
+KEYPAD INS: Resets the timescale to 1.0
+
+KEYPAD DOWNARROW: Decrease timescale by 1.0.  If at 1.0, decreases timescale by 0.1
+                  all the way down to timescale 0.1.
+
+KEYPAD LEFTARROW:
+MWHEELDOWN:      Decreases timescale by 0.1, all the way down to timescale 0.1.
+
+KEYPAD UPARROW: Increases timescale by 1.0.
+
+KEYPAD LEFTARROW:
+MWHEELUP:         Increases timescale by 0.1.
+
+   Note:
+      Whenever the timescale is changed, a small textbox is displayed in the lower
+      left corner for a couple of seconds to show the current timescale.  This can
+      be disabled by setting demo_drawTimeScale to 0.
+
+
+//
+// Screenshot controls
+//
+F11: Normal "shotxxxx" screenshots.  Uses cg_useScreenshotJPEG settings.
+F12: Autoscreenshot command
+
+
+//
+// Multiview controls
+//
+MOUSE1: Works just like your main +attack (fire) button in-game.  This is all
+        you will need to operate all mulitivew controls (see osp-wolf-Multiview.txt
+        for complete info on operating the MV interface).

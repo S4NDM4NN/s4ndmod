@@ -1,0 +1,98 @@
+OSP for Wolfenstein - Stats Info
+================================
+Version: 0.9
+Date:    30 Dec 02
+Contact: rhea@OrangeSmoothie.org
+Site:    http://www.OrangeSmoothie.org
+
+
+
+End of Game Stats displayed in the console:
+-------------------------------------------
+After a round/match, the following information is dumped in the console:
+
+TEAM   Player          Kll Dth Sui TK Eff Gib    DG    DR   TD  Score
+---------------------------------------------------------------------
+Allies a|rhea            6   2   1  0  75  11     0     0    0     48
+---------------------------------------------------------------------
+Allies Totals            6   2   1  0  75  11     0     0    0     48
+
+
+For each team, each member of the team will have their stats given at the
+end of a round/match.  The team's total's is simply a summation of all the
+stats of the team members.
+
+	Kll: Total number of killed enemies
+	Dth: Total number of deaths caused by enemies
+	Sui: Total number of suicides
+	 TK: Total number of Team Kills
+	Eff: Overall Kill/Death efficiency: Kll/(Kll + Dth)
+	Gib: Total "gibs" made in the game (forcing an enemy to unrevivable limbo)
+	 DG: Total damage given
+	 DR: Total damage received
+	 TD: Total damage inflicted on teammates
+
+
+
+Weapon Accuracy information in server logs:
+-------------------------------------------
+
+Entrie:
+
+  Dynamite_Diffuse: <player_id>
+  Dynamite_Plant: <player_id>
+  Repair: <player_id>
+  Medic_Revive: <medic_id> <revived_player_id>
+  Objective_Destroy: <player_id> <bonus>
+  Ammo_Pack: <issuing_player_id> <receiving_player_id>
+  Ammo_Pack_Score: <issuing_player_id>  (scoring event for player)
+  Health_Pack: <issuing_player_id> <receiving_player_id>
+  Health_Pack_Score: <issuing_player_id>  (scoring event for player)
+
+  WeaponStats: <player_id> <round_#> <weaponmask> [<weapon1 info> .. <weaponN info>] <dmg_given> <dmg_rcvd> <team_dmg> <gibs>
+
+
+	 player_id: Player's entity ID
+
+	   round_#: Total rounds played
+
+	weaponmask: Weapons tracked for a player.  This is a bitmask:
+
+		     1 (0)  - Knife
+		     2 (1)  - Luger
+		     4 (2)  - Colt
+		     8 (3)  - MP40
+		    16 (4)  - Thompson
+		    32 (5)  - Sten
+		    64 (6)  - Sniper Rifle
+		   128 (7)  - CrewGun
+		   256 (8)  - Panzerfaust
+		   512 (9)  - Venom
+		  1024 (10) - Flamethrower
+		  2048 (11) - Health Packs
+		  4096 (12) - Grenade
+		  8192 (13) - Mortar
+		 16384 (14) - Dynamite
+		 32768 (15) - Airstrike
+		 65536 (16) - Artillary
+		131072 (17) - Syringe
+		262144 (18) - Ammo Packs
+
+	dmg_given: Total damage inflicted by the player
+
+	 dmg_rcvd: Total damage received by the player
+
+	 team_dmg: Total damage inflicted on teammates
+
+	     gibs: Total "gibs" the player made in the game
+
+	<weaponN info>: This entry (a set of 5 values) is describes after the above
+                        values in the WeaponStats line.  The number of these entries
+			depends on the number of set bits in the weaponmask.  The
+			ordering of entries is in low bit format, so a Knife's set
+			of values will appear before a Venom's set of values.  ONLY
+			the weapons specified in the bitmask will have an entry.
+			The format shown below is the set of values associated with
+			each weapon specified in the <weaponmask> entry:
+
+		<hits> <attempts> <kills> <deaths> <headshots>

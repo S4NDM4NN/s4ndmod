@@ -1,0 +1,120 @@
+OSP for Wolfenstein - Multiview Spectator Mode
+==============================================
+Version: 0.9
+Date:    30 Dec 03
+Contact: rhea@OrangeSmoothie.org
+Site:    http://www.OrangeSmoothie.org
+
+
+"Multiview" (referred to simply as "MV" throughout this document)
+spectating is the ability to follow 2 or more clients
+at the same time.  Under OSP, these clients can be viewed
+simultaneously with windowed views of players, or through simple
+flipping between main views of the desired players.
+
+The really nice part of this is that a demo recorded under a
+MV spectator mode has the exact same set of controls and features
+available in demo playback as there are when spectating a live
+match.  Thus, demo viewers are no longer handcuffed to the views
+seen during the recording, and are free to view any client
+contained in the multiview demo.
+
+The layout of the multiview interface is much like Windows.  There
+are common window and drop-down widgets seen in any windows-based
+environment.  You're fire button and mouse are all you need to operate
+the controls.
+
+For demo controls, please refer to the osp-wolf-DemoControls.txt
+file found elsewhere in this distribution.
+
+
+Recording under MV:
+-------------------
+Recording is identical as normal recording.  If you use the
+"autorecord" command, the demo will be named with a "MVD"
+tag in the filename to more easily identify a demo that
+contains multiview info.
+
+
+Usage:
+------
+To begin multiview spectator mode, issue:
+
+     \mvallies
+     \mvaxis
+     \mvall
+     \mvd
+
+.. to view the entire allies/axis teams, or everyone in the game.
+"mvd" is the same as "mvall", except that it also begins recording
+immediately (dK is a newbie).  If a new client joins a team after
+you have started recording, they are automatically added to your
+current view.
+
+Once MV is activated, you will see the appropriate team flags with
+a number to the left representing the number of players that are
+being tracked.  To the right of the flag is a drop down widget that
+allows you to expand/collapse the list of names of players on the
+team.
+
+Highlighted player names in the drop-down list are the players
+currently viewed.  The player with the "*" to the left of their
+name is the current "main" view.  Clicking on a player name will
+cause a new window to appear.  If the player's window already exists,
+click on their name will close their window.
+
+Windows can be moved by clicking and holding your fire btton on the
+window's status bar, and then moving the mouse (just like Windows).
+
+To swap a window view with the main view, click the maximize button
+of the window (in the upper right), or the main window view.
+
+To close a window, click on the "close" (red X) button of the
+window, or the players name in the drop down player list.
+
+To resize a window, click and hold the diagonal pattern in the
+lower right of the window (just below the ammo info).
+
+You can click in the main view to scroll through players, just
+like normal in-eyes spectating.
+
+
+Window Info:
+------------
+The HUD for window views is shown below
+
++----------------------------------------------------------------+
+| Playername                                              []   X |
+|                                                                |
+|                (Main view of the player)                       |
+|                                                                |
+|                                                                |
+|                                                     S<percent> |
+|                                                     C<percent> |
+|                                                   [WeaponIcon] |
+| Class/Current Health   <Engineer work percent>   Ammoclip/Ammo |
++----------------------------------------------------------------+
+
+Class: E(blue), M(white), L(green), S(red)
+
+<Engineer work percent>: Only appears when an engineer is "working"
+                         (i.e. arming/defusing dynamite, repairing)
+
+S<percent>: A green "S" followed by a number describes the percentage
+            of sprint reserves left for the player.  This will only
+			appear when the sprint reserve is less than 100%
+
+C<percent>: A red "C" followed by a number describes the percentage
+            of charge for a player's primary weapon (panzer, revive,
+			etc.).  This will only appear when the weapon charge
+			percentage is less than 100%.
+
+[WeaponIcon]: Appears for all weapon but the knife.  It flashes the
+              current weapon state for the player:
+
+				RED    - Firing
+				YELLOW - Reloading
+				WHITE  - Weaponswitch
+
+There is a resize widget just below the Ammoclip/Ammo info that you can click
+and drag to resize the window.

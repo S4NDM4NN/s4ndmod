@@ -1,0 +1,25 @@
+//
+//Brush Scripting
+//Map: boss 1 
+//Created by Agent
+//Last edited by: agent
+//
+counter1	// Used for cinematic syncronization.
+{
+	spawn
+	{
+		wait 1000
+		alertentity opendoor
+		alertentity coronaon
+		alertentity plane_engines
+		//trigger counter1 plane_cine1
+
+	}
+}
+
+counter2
+{
+	spawn
+	{
+	}
+}

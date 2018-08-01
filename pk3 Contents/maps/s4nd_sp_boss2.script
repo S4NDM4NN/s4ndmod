@@ -1,0 +1,462 @@
+//
+//Brush Scripting
+//Map: Boss2
+//Last edited by: Mike (110501)
+//
+
+counter1
+{
+	spawn
+	{
+		wait 5
+		alertentity door1
+	}
+}
+
+big_door1_lever
+{
+	spawn
+	{
+		//accum 0 bitreset 0	// Used so that open only triggers once.
+		wait 100
+		trigger big_door1_lever open
+	}
+
+	trigger open
+	{
+		//accum 0 abort_if_bitset 0
+		//accum 0 bitset 0
+		faceangles 90 0 0 500
+		faceangles 180 0 0 500
+		alertentity big_door1_sound
+		trigger big_door1 up
+		wait 2000
+		//trigger proto1 go
+		wait 11000
+		alertentity big_door1_sound
+	}
+
+	trigger elevator1_soundloop
+	{
+		wait 1000 0
+		trigger elevator1 soundloop
+	}
+}
+
+lever1
+{
+	spawn
+	{
+		remove
+	}
+}
+
+lever2
+{
+	spawn
+	{
+		remove
+	}
+}
+
+elevator1	// The first elevator you run into in the map.
+{
+
+	spawn
+	{
+		trigger elevator1 up
+	}
+
+
+	trigger stop	// This stops the elevator in it's tracks.
+	{
+		accum 0 bitset 0
+		wait 5
+		stopsound
+		playsound sound\movers\elevators\elev1_end.wav
+		halt
+		resetscript
+	}
+
+	trigger soundloop
+	{
+		accum 0 abort_if_bitset 0
+		playsound sound\movers\elevators\elev1_loop.wav LOOPING
+	}
+
+	trigger up	// This moves the elevator up.
+	{
+		accum 0 bitreset 0
+		wait 5
+		trigger counter1 get_objective3
+		playsound sound\movers\elevators\elev1_start.wav
+		trigger e1lever1 up	// This triggers the lever to move up with the elevator.
+		gotomarker e1up1 50 wait
+		gotomarker e1up4 50 deccel wait
+		stopsound
+		playsound sound\movers\elevators\elev1_end.wav
+		wait 10000
+		trigger elevator1 down
+	}
+
+	trigger down	// This moves the elevator down
+	{
+		accum 0 bitreset 0
+		wait 5
+		playsound sound\movers\elevators\elev1_start.wav
+		trigger e1lever1 down	// This trigger the lever to mvoe down with the elevator.
+		gotomarker e1down1 50 wait
+		gotomarker e1down4 50 deccel wait
+		stopsound
+		playsound sound\movers\elevators\elev1_end.wav
+		wait 10000
+		trigger elevator1 up
+	}
+}
+
+e1upbtn
+{
+	spawn
+	{
+		accum 0 bitset 0
+		accum 0 bitreset 1
+		wait 5
+		gotomarker e1upbtnspot2 10
+	}
+
+	trigger toggle
+	{
+		wait 5
+		trigger e1upbtn beep
+		wait 5
+		trigger e1upbtn up
+	}
+
+	trigger beep
+	{
+		accum 0 abort_if_bitset 0
+		accum 0 bitset 0
+		resetscript
+	}
+	
+	trigger up
+	{
+		accum 0 abort_if_bitset 1
+		accum 0 bitset 1
+		accum 0 bitreset 0
+		resetscript
+		trigger e1lever1 up2	// This triggers the lever to go down.
+	}
+
+	trigger on	// Player has touched the button
+	{
+		accum 0 bitset 0
+		accum 0 bitreset 1
+		playsound basein_switch
+		gotomarker e1upbtnspot1 10 wait
+	}
+
+	trigger off 	// Player has not touched the button
+	{
+		accum 0 bitset 1
+		accum 0 bitreset 0
+		gotomarker e1upbtnspot2 10 wait
+	}
+}
+
+e1dwnbtn
+{
+	spawn
+	{
+		accum 0 bitset 0
+		accum 0 bitset 1
+		wait 5
+		gotomarker e1dwnbtnspot2 10 wait
+	}
+
+	trigger toggle
+	{
+		wait 5
+		trigger e1dwnbtn beep
+		wait 5
+		trigger e1dwnbtn down
+	}
+
+	trigger beep
+	{
+		accum 0 abort_if_bitset 0
+		accum 0 bitset 0
+		resetscript
+	}
+	
+	trigger down
+	{
+		accum 0 abort_if_bitset 1
+		accum 0 bitset 1
+		accum 0 bitreset 0
+		resetscript
+		trigger e1lever1 down2	// This triggers the lever to go down.
+	}
+
+	trigger on	// Player has touched the button
+	{
+		accum 0 bitset 0
+		accum 0 bitreset 1
+		gotomarker e1dwnbtnspot1 10 wait
+	}
+
+	trigger off 	// Player has not touched the button
+	{
+		accum 0 bitset 1
+		accum 0 bitreset 0
+		playsound basein_switch
+		gotomarker e1dwnbtnspot2 10 wait
+	}
+}
+
+e1lever1	// This is the elevator's lever. 
+{
+	spawn
+	{
+		accum 0 bitset 0 	// Accum value so that it knows to Stop.
+		accum 0 bitreset 1	// Accum value so that it knows to go Down.
+		accum 0 bitset 2	// Accum value so that it knows to go Up.
+		accum 1 set 0		// Checks to see what direction the elevator is going. (1 up, 2 down, 3 stop)
+	}
+
+	trigger toggle
+	{
+		wait 5
+		trigger e1lever1 stop
+		wait 5
+		trigger e1lever1 up2
+		wait 5
+		trigger e1lever1 down2
+	}
+
+	trigger toggle_by_ai
+	{
+		wait 500
+		trigger e1lever1 stop
+		wait 5
+		trigger e1lever1 up2
+		wait 5
+		trigger e1lever1 down2
+	}
+
+	trigger stop	// This triggers everything to stop.
+	{
+		accum 0 abort_if_bitset 0
+		resetscript
+		accum 0 bitset 0
+		trigger e1lever1 check
+		wait 5	
+		trigger e1lever1 upstop // Checks to see what direction the elevator is heading.
+		wait 5
+		trigger e1lever1 downstop	
+	}
+
+	trigger upstop
+	{
+		accum 1 abort_if_not_equal 1
+		resetscript
+		trigger elevator1 stop	// Triggers the elevator to stop.
+		playsound sound\scenaric\basein\elev_lever.wav
+		wait 5
+		halt
+		faceangles 0 0 0 400
+	}
+
+	trigger downstop
+	{
+		accum 1 abort_if_not_equal 2
+		resetscript
+		trigger elevator1 stop	// Triggers the elevator to stop.
+		playsound sound\scenaric\basein\elev_lever.wav
+		wait 5
+		halt
+		faceangles 0 0 0 400		
+	}
+
+	trigger up2
+	{
+		accum 0 abort_if_bitset 1
+		resetscript
+		accum 0 bitreset 0
+		accum 0 bitset 1
+		accum 0 bitset 2
+		wait 20
+		trigger e1upbtn off
+		faceangles -20 0 0 750
+		trigger elevator1 up
+	}
+
+	trigger down2
+	{
+		accum 0 abort_if_bitset 2
+		resetscript
+		accum 0 bitreset 0
+		accum 0 bitset 1
+		accum 0 bitset 2
+		wait 20
+		trigger e1dwnbtn off
+		playsound sound\scenaric\basein\elev_lever.wav
+		faceangles 20 0 0 750
+		trigger elevator1 down	
+	}
+
+	trigger up	// Triggers the Lever to go up with the elevator.
+	{
+		accum 1 set 1
+		accum 0 bitreset 2
+		//alertentity e1downdisable
+		gotomarker e1lvr1up1 50 wait
+		accum 0 bitset 0
+		gotomarker e1lvr1up4 50 deccel wait
+		wait 200
+		playsound sound\scenaric\basein\elev_lever.wav
+		faceangles 0 0 0 400
+		trigger e1upbtn off
+		trigger e1dwnbtn on
+	}
+
+	trigger down	// Triggers the Lever to go up with the elevator.
+	{
+		accum 1 set 2
+		accum 0 bitreset 1
+		gotomarker e1lvr1down1 50 wait
+		accum 0 bitset 0
+		gotomarker e1lvr1down4 50 deccel wait
+		wait 200
+		playsound sound\scenaric\basein\elev_lever.wav
+		faceangles 0 0 0 400
+		trigger e1upbtn on
+		trigger e1dwnbtn off
+	}
+}
+
+natter
+{
+	spawn
+	{
+		accum 0 bitreset 0		// used so 'go' is only done once.
+		wait 5
+		faceangles 0 90 0 1000
+		wait 10000
+		trigger natter go
+	}
+
+	trigger go
+	{
+		accum 0 abort_if_bitset 0
+		accum 0 bitset 0
+		alertentity takeoff
+		alertentity start_flame
+		wait 3000
+		trigger ski go
+		gotomarker natterspot1 800 accel wait
+		gotomarker natterspot2 800 wait
+		alertentity start_flame
+		trigger ldoor1 natter_killer
+	}
+
+	trigger noshoot1_5
+	{
+		wait 5
+		trigger super1 noshoot1_5
+		wait 5000
+		trigger super1 reset_noshoot1_5
+	}
+}
+
+ski
+{
+	spawn
+	{
+	}
+
+	trigger go
+	{
+		gotomarker skispot1 540 accel wait
+		gotomarker skispot2 500
+		faceangles 0 0 10 gototime
+		gotomarker skispot3 460 
+		faceangles 0 0 20 gototime
+		gotomarker skispot4 440 
+		faceangles 0 0 30 gototime
+		gotomarker skispot5 400 
+		faceangles 0 0 40 gototime
+		gotomarker skispot6 300 
+		faceangles 0 0 50 gototime
+		gotomarker skispot7 360 
+		faceangles 0 0 60 gototime
+		gotomarker skispot8 420 
+		faceangles 0 0 70 gototime
+		gotomarker skispot9 480 
+		faceangles 0 0 80 gototime
+		gotomarker skispot10 540 
+		faceangles 0 0 90 gototime
+		gotomarker skispot11 600 
+		faceangles 0 0 100 gototime
+		gotomarker skispot12 660 
+		faceangles 0 0 110 gototime
+		gotomarker skispot13 720 
+		faceangles 0 0 120 gototime
+		gotomarker skispot14 780 
+	}
+
+}
+
+ldoor1
+{
+	spawn
+	{
+		trigger ldoor1 cine_open
+	}
+
+	trigger cine_open
+	{
+		alertentity fake_sound
+		alertentity lastdoor_sound
+		gotomarker ldoor1_spot2 5 wait
+		alertentity lastdoor_sound
+		wait 6000
+		gotomarker ldoor1_spot1 25 wait
+	}
+
+	trigger open
+	{
+		alertentity lastdoor_sound
+		gotomarker ldoor1_spot2 5 wait
+		alertentity lastdoor_sound
+	}
+
+	trigger close
+	{
+		gotomarker ldoor1_spot1 25 wait
+	}
+
+	trigger close_now
+	{
+		resetscript
+		gotomarker ldoor1_spot1 15000 wait
+	}
+
+	trigger natter_killer
+	{
+		wait 5
+		alertentity kill_natter
+	}
+}
+
+big_door1
+{
+	spawn
+	{
+	}
+
+	trigger up
+	{
+		gotomarker bdoor1spot2 20 wait
+	}
+}

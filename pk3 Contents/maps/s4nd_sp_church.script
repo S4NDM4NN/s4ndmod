@@ -1,0 +1,399 @@
+//
+//Brush Scripting
+//Map: Church
+//Last Edited by: Mike (110501)
+//
+
+coffincover1a
+{
+	spawn
+	{
+		accum 0 set 0	// Used to count the dead elite guards.
+		trigger coffincover1a slowopen
+	}
+
+	trigger slowopen
+	{
+		playsound coffinlid_1
+		faceangles 0 10 0 2000
+		gotomarker cover1spot1 20 
+		faceangles 0 5 0 gototime
+		gotomarker cover1spot2 40
+		faceangles -20 5 0 gototime
+		gotomarker cover1spot3 60
+		faceangles -30 5 0 gototime
+		gotomarker cover1spot4 80
+		faceangles -40 5 0 gototime
+		gotomarker cover1spot5 100
+		faceangles -50 5 0 gototime
+		gotomarker cover1spot6 120
+		faceangles -60 5 0 gototime
+		gotomarker cover1spot7 140
+		faceangles -70 5 0 gototime
+		gotomarker cover1spot8 160
+		faceangles -80 5 0 gototime
+		alertentity dust1
+		gotomarker cover1spot10 40
+		faceangles -180 5 0 gototime
+		alertentity dust2
+		wait 100
+		alertentity dust3
+	}
+
+
+	trigger objective3
+	{
+		accum 0 inc 1
+		accum 0 abort_if_not_equal 20
+		trigger player got_objective3
+	}
+
+	trigger fastopen
+	{
+	}
+}
+
+coffincover1b
+{
+	spawn
+	{
+		trigger coffincover1b slowopen
+	}
+
+	trigger slowopen
+	{
+		faceangles 0 10 0 2000
+		gotomarker cover1spot1 20 
+		faceangles 0 5 0 gototime
+		gotomarker cover1spot2 40
+		faceangles -20 5 0 gototime
+		gotomarker cover1spot3 60
+		faceangles -30 5 0 gototime
+		gotomarker cover1spot4 80
+		faceangles -40 5 0 gototime
+		gotomarker cover1spot5 100
+		faceangles -50 5 0 gototime
+		gotomarker cover1spot6 120
+		faceangles -60 5 0 gototime
+		gotomarker cover1spot7 140
+		faceangles -70 5 0 gototime
+		gotomarker cover1spot8 160
+		faceangles -80 0 0 gototime
+		//alertentity dust1
+		gotomarker cover1spot9 40
+		faceangles -180 0 0 gototime
+		//alertentity dust2
+		wait 100
+		//alertentity dust3
+	}
+
+	trigger fastopen
+	{
+	}
+}
+
+lightning1
+{
+	spawn
+	{
+		trigger lightning1 loop
+	}
+
+	trigger cine1
+	{
+		alertentity dlightning2
+		wait 50
+		alertentity slightning2
+		wait 1500
+		alertentity dlightning2
+		wait 3000
+		alertentity sthunder2
+		wait 10000
+		trigger lightning1 loop
+	}
+
+	trigger loop
+	{
+		wait 5000
+		alertentity dlightning1
+		wait 50
+		alertentity slightning1
+		wait 500
+		alertentity dlightning1
+		wait 3000
+		alertentity sthunder1
+		wait 10000
+
+		alertentity dlightning2
+		wait 50
+		alertentity slightning2
+		wait 1500
+		alertentity dlightning2
+		wait 3000
+		alertentity sthunder2
+		wait 10000
+
+		alertentity dlightning1
+		wait 50
+		alertentity slightning3
+		wait 750
+		alertentity dlightning2
+		wait 2000
+		alertentity sthunder3
+		wait 10000
+
+		alertentity dlightning2
+		wait 50
+		alertentity slightning1
+		wait 1500
+		alertentity dlightning2
+		wait 3000
+		alertentity sthunder3
+		wait 10000
+
+		alertentity dlightning1
+		wait 50
+		alertentity slightning1
+		wait 750
+		alertentity dlightning2
+		wait 50
+		alertentity slightning2
+		wait 750
+		alertentity dlightning2
+		wait 100
+		alertentity dlightning2
+		wait 50
+		alertentity slightning3
+		wait 1500
+		alertentity dlightning1
+		wait 2000
+		alertentity sthunder3
+		wait 16000
+
+		trigger lightning1 loop2
+	}
+
+	trigger loop2
+	{
+		alertentity dlightning1
+		wait 50
+		alertentity slightning1
+		wait 1500
+		alertentity dlightning1
+		wait 3000
+		alertentity sthunder3
+		wait 10000
+		
+		alertentity dlightning2
+		wait 50
+		alertentity slightning3
+		wait 750
+		alertentity dlightning2
+		wait 2000
+		alertentity sthunder3
+		wait 10000
+		trigger lightning1 loop
+	}
+
+	trigger once
+	{
+		alertentity dlightning2
+		wait 50
+		alertentity slightning2
+		wait 1500
+		alertentity dlightning2
+		wait 3000
+		alertentity sthunder2
+	}
+
+	trigger stinger
+	{
+		wait 6000
+		alertentity dlightning1
+		wait 50
+		alertentity slightning1
+		wait 10000
+		trigger lightning1 loop
+	}
+}
+
+portcullis1
+{
+	spawn
+	{
+		//remove
+		//accum 0 bitreset 0
+		wait 100
+		trigger portcullis1 up
+	}
+
+	trigger toggle
+	{
+		wait 5
+		trigger portcullis1 up
+		wait 5
+		trigger portcullis1 down
+	}
+
+	trigger up
+	{
+		//accum 0 abort_if_bitset 0
+		//accum 0 bitset 0
+		//trigger portcullis3 down
+		//resetscript
+		stopsound
+		playsound sound/movers/doors/door6_loopo.wav looping
+		gotomarker port1spot1 10 wait
+		stopsound
+	}
+
+	trigger down
+	{
+		accum 0 abort_if_not_bitset 0
+		accum 0 bitreset 0
+		resetscript
+		stopsound
+		playsound sound/scenaric/church/doorcrash.wav
+		gotomarker port1spot2 200 accel wait
+		gotomarker port1spot3 60 deccel wait
+		gotomarker port1spot2 80 accel wait
+	}
+
+	trigger action3
+	{
+	}
+}
+
+portcullis2
+{
+	spawn
+	{
+		wait 100
+		trigger portcullis2 up
+	}
+
+	trigger toggle
+	{
+		wait 5
+		trigger portcullis2 up
+		wait 5
+		trigger portcullis2 down
+	}
+
+	trigger up
+	{
+		accum 0 abort_if_bitset 0
+		accum 0 bitset 0
+		resetscript
+		stopsound
+		playsound sound/movers/doors/door6_loopo.wav looping
+		gotomarker port2spot1 10 wait
+		stopsound
+	}
+
+	trigger down
+	{
+		accum 0 abort_if_not_bitset 0
+		accum 0 bitreset 0
+		resetscript
+		stopsound
+		playsound sound/scenaric/church/doorcrash.wav
+		gotomarker port2spot2 200 accel wait
+		gotomarker port2spot3 60 deccel wait
+		gotomarker port2spot2 80 accel wait
+	}
+}
+
+portcullis3
+//		*** This must be remove because it goes into the room above it
+{
+	spawn
+	{
+		remove
+	}
+
+	trigger toggle
+	{
+		wait 5
+		trigger portcullis3 up
+		wait 5
+		trigger portcullis3 down
+	}
+
+	trigger up
+	{
+		accum 0 abort_if_bitset 0
+		accum 0 bitset 0
+		resetscript
+		stopsound
+		playsound sound/movers/doors/door6_loopo.wav looping
+		gotomarker port3spot1 10 wait
+		stopsound
+	}
+
+	trigger down
+	{
+		accum 0 abort_if_not_bitset 0
+		accum 0 bitreset 0
+		resetscript
+		stopsound
+		playsound sound/scenaric/church/doorcrash.wav
+		gotomarker port3spot2 200 accel wait
+		gotomarker port3spot3 60 deccel wait
+		gotomarker port3spot2 80 accel wait
+	}
+}
+
+counter1
+{
+	spawn
+	{
+		remove
+	}
+}
+
+vacuum
+{
+	spawn
+	{
+		wait 5
+		faceangles 0 270 0 1000
+	}
+
+	trigger anim
+	{
+		playanim 0 350 1000
+	}
+}
+
+zom
+{
+	spawn
+	{
+		wait 5
+		faceangles 0 180 0 1000
+	}
+}
+
+fake_zombie
+{
+	spawn
+	{
+		wait 5
+		faceangles 0 270 0 1000
+	}
+
+	trigger anim
+	{
+		playanim 0 34 10
+	}
+}
+
+box
+{
+	spawn
+	{
+		wait 5
+		faceangles 0 180 0 1000
+	}
+}

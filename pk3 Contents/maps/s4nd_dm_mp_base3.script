@@ -1,0 +1,415 @@
+//
+//Brush Scripting
+//Map: mp_base
+//Last edited by: Brandon
+//
+
+game_manager
+{
+	spawn
+	{
+		// Set scenario information
+
+		wm_mapdescription			"The Allies must destroy both the North and South Radar Controls. The Axis must defend them until the 'top secret' message is finished transmitting."
+
+		wm_axis_respawntime		30
+		wm_allied_respawntime		20
+
+		wm_number_of_objectives		2
+
+		wm_set_round_timelimit	15
+
+		// Set objective #1 properties
+
+		// Nazi's control objective #1 at the start
+		wm_set_objective_status		1	0
+		wm_set_objective_status		2	0
+		wm_objective_axis_desc		1	"Primary Objective:**Defend the North Radar."
+		wm_objective_axis_desc		2	"Primary Objective:**Defend the South Radar."
+		wm_objective_allied_desc	1	"Primary Objective:**Destroy the North Radar Controls."
+		wm_objective_allied_desc	2	"Primary Objective:**Destroy the South Radar Controls."
+		wm_objective_image			1	"gfx/2d/mp_objectives/base_obj_2.tga"			// NERVE - MBJ
+		wm_objective_image			2	"gfx/2d/mp_objectives/base_obj_1.tga"			// NERVE - MBJ
+		wm_overview_image			"video/mp_base.roq"
+
+		// SHORT DESCRIPTIONS
+
+		wm_objective_short_axis_desc	1	"Defend the North Radar"
+		wm_objective_short_axis_desc	2	"Defend the South Radar"
+
+		wm_objective_short_allied_desc	1	"Destroy the North Radar"
+		wm_objective_short_allied_desc	2	"Destroy the South Radar"
+
+		// Set Defending Team for SW Mode
+
+		wm_set_defending_team	0
+
+		// If the round timer expires, the Nazis have won, so set the current winning team
+		// Set the round winner:  0 == AXIS, 1 == ALLIED
+		wm_setwinner 0
+
+		// Accum #1 will be the state of objective number one
+		accum 1 set 0
+		accum 2 set 0
+	}
+
+	trigger objective1
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Allied takes control of objective #1
+		wm_set_objective_status		1	1
+
+		// Change the variable within the script so that we can check if someone wins the round
+		accum 1 set 1
+
+		// Some kind of UI pop-up to alert players
+		wm_announce	"Allied team has disabled the North Radar!"
+		trigger north_radar destroyed
+		// Call function to check if the round has been won
+		trigger game_manager checkgame
+	}
+
+	trigger objective2
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Allied takes control of objective #1
+		wm_set_objective_status		2  1
+
+		// Change the variable within the script so that we can check if someone wins the round
+		accum 2 set 1
+
+		// Some kind of UI pop-up to alert players
+		wm_announce	"Allied team has disabled the South Radar!"
+		trigger south_radar destroyed
+		// Call function to check if the round has been won
+		trigger game_manager checkgame
+	}
+
+	trigger checkgame
+	{
+		accum 1 abort_if_not_equal 1
+		accum 2 abort_if_not_equal 1
+
+		// Set the round winner:  0 == AXIS, 1 == ALLIED
+		wm_setwinner 1
+
+		wait 1500
+
+		// End the round
+		wm_endround
+	}
+}
+north_radar_remove
+{
+	spawn
+	{
+		remove
+	}
+}
+
+south_radar_remove
+{
+	spawn
+	{
+		remove
+	}
+}
+
+axis_two01
+{
+	spawn
+	{
+		remove
+	}
+}
+
+allied_two01
+{
+	spawn
+	{
+		remove
+	}
+}
+
+radar_pieces
+{
+	spawn
+	{
+		remove
+	}
+}
+
+cp_clipremove01
+{
+	spawn
+	{
+		remove
+	}
+}
+
+radar_obj1 //the north radar structure
+{
+	spawn
+	{
+	}
+
+	death
+	{
+		trigger game_manager objective1
+	}
+}
+
+radar_obj2 //the south radar structure
+{
+	spawn
+	{
+	}
+
+	death
+	{
+		trigger game_manager objective2
+	}
+}
+
+north_radar
+{
+	spawn
+	{
+		playsound sound/multiplayer/radar_loop02.wav looping
+		trigger north_radar rotateloop
+	}
+
+	trigger rotateloop
+	{
+		faceangles 0 -90 0 3000
+		faceangles 0 -180 0 3000
+		faceangles 0 -270 0 3000
+		faceangles 0 -360 0 3000
+		trigger north_radar rotateloop
+	}
+
+	trigger destroyed
+	{
+		stopsound
+		halt
+	}
+
+	death
+	{
+	}
+}
+
+south_radar
+{
+	spawn
+	{
+		playsound sound/multiplayer/radar_loop02.wav looping
+		trigger south_radar rotateloop
+	}
+
+	trigger rotateloop
+	{
+		faceangles 0 -90 0 3000
+		faceangles 0 -180 0 3000
+		faceangles 0 -270 0 3000
+		faceangles 0 -360 0 3000
+		trigger south_radar rotateloop
+	}
+
+	trigger destroyed
+	{
+		stopsound
+		halt
+	}
+
+	death
+	{
+	}
+}
+
+checkpoint01
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint02
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint03
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint04
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint1_base
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint2_base
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint3_base
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint4_base
+{
+	spawn
+	{
+		remove
+	}
+}
+
+// LEVER STUFF
+
+base_lever1
+{
+	spawn
+	{
+	}
+
+	trigger down
+	{
+		gotomarker gate_lever1_downpos 16
+		trigger base_gate1 open
+	}
+
+	trigger up
+	{
+		gotomarker gate_lever1_uppos 16
+		trigger base_gate1 close
+	}
+}
+
+base_lever2
+{
+	spawn
+	{
+	}
+
+	trigger down
+	{
+		gotomarker gate_lever2_downpos 16
+	}
+
+	trigger up
+	{
+		gotomarker gate_lever2_uppos 16
+	}
+}
+
+base_gate1_trigger1
+{
+	spawn
+	{
+			accum 5 set 1
+	}
+
+	trigger base_lever1up
+	{
+			accum 5 abort_if_not_equal 1
+			trigger base_lever1 up
+			trigger base_lever2 up
+			accum 5 set 0
+			wait 4000
+			trigger base_gate1_trigger2 setaccum0
+	}
+
+	trigger setaccum0
+	{
+			accum 5 set 0
+	}
+
+	trigger setaccum1
+	{
+			accum 5 set 1
+	}
+}
+
+base_gate1_trigger2
+{
+	spawn
+	{
+			accum 5 set 1
+	}
+
+	trigger base_lever1down
+	{
+			accum 5 abort_if_not_equal 0
+			trigger base_lever1 down
+			trigger base_lever2 down
+			accum 5 set 1
+			wait 4000
+			trigger base_gate1_trigger1 setaccum1
+	}
+
+	trigger setaccum0
+	{
+			accum 5 set 0
+	}
+
+	trigger setaccum1
+	{
+			accum 5 set 1
+	}
+}
+
+base_gate1
+{
+	spawn
+	{
+	}
+
+	trigger open
+	{
+		wait 500
+		playsound sound/scenaric/assault/big_gate1.wav
+		wait 400
+		playsound sound/scenaric/assault/big_gate2.wav looping forever
+		gotomarker gate_pos1 32 wait
+		stopsound
+		playsound sound/scenaric/assault/big_gate3.wav
+	}
+
+	trigger close
+	{
+		wait 500
+		playsound sound/scenaric/assault/big_gate1.wav
+		wait 400
+		playsound sound/scenaric/assault/big_gate2.wav looping forever
+		gotomarker gate_pos2 32 wait
+		stopsound
+		playsound sound/scenaric/assault/big_gate3.wav
+	}
+}

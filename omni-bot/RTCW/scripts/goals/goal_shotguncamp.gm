@@ -1,0 +1,13 @@
+this.Name = "Shotgun";
+this.Parent = "LowLevel";
+
+this.LimitToWeapon(WEAPON.SHOTGUN);
+this.LimitToNoTarget(); // let weapon system take over when they have a target
+
+this.GetPriority = function()
+{
+	if (this.Bot.GetVelocity().IsZero()){
+		this.AddWeaponRequest(Priority.Low, WEAPON.SHOTGUN );
+	}
+	sleep(1);
+};

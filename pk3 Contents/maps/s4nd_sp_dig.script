@@ -1,0 +1,50 @@
+//
+//Chad's second scripting attempt.  :)
+//First Room
+//
+//created by agent
+//edited by agent
+//this one is really fucking retarted
+
+counter1
+{
+	trigger action2
+	{
+		alertentity bust1
+		wait 500
+		alertentity bust2
+		wait 1000
+		alertentity bust3
+	}
+}
+
+rock1
+{
+	spawn
+	{
+		wait 100
+		trigger rock1 rockfall
+	}
+	trigger rockfall
+	{
+		gotomarker fall1 3000 accel
+		faceangles 540 540 540 gototime
+	}
+}
+
+rock2
+{
+	spawn
+	{
+		wait 100
+		trigger rock2 rockfall
+	}
+	trigger rockfall
+	{
+		gotomarker fall2 300 accel wait
+		faceangles -45 20 0 750
+	}
+}
+
+
+

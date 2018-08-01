@@ -1,0 +1,337 @@
+//
+//Brush Scripting
+//Map: OBJ Ice
+//Last edited by: agent
+//Fixed flag for war docs starting in allied control
+//
+
+game_manager
+{
+	spawn
+	{
+		// Set scenario information
+
+		wm_mapdescription			"The Allies have set up a position close to an Axis Outpost."
+
+		wm_axis_respawntime		30
+		wm_allied_respawntime		30
+
+		wm_set_round_timelimit		10
+
+		// Allies are defending
+		wm_set_defending_team	1
+
+		// Added for SO
+
+		wm_number_of_objectives		5
+		wm_set_objective_status		1	1 // Allied Documents
+		wm_set_objective_status		2	1 // Allied Trigger Objective
+		wm_set_objective_status		3	1 // Service Door
+		wm_set_objective_status		4 	1 // Fortress Wall
+		wm_set_objective_status		5	-1 // Respawn Flag
+
+		// LONG DESCRIPTIONS
+
+		wm_objective_axis_desc	1	"Primary Objective:**Steal the Allied War Docuemnts."
+		wm_objective_axis_desc	2	"Primary Objective:**Transmit the Allied War Documents."
+		wm_objective_axis_desc	3	"Secondary Objective:**Destroy the Service Door."
+		wm_objective_axis_desc	4	"Secondary Objective:**Destroy the Fortress Wall."
+		wm_objective_axis_desc	5	"Secondary Objective:**Capture the Shipping Halls."
+		wm_objective_allied_desc		1	"Primary Objective:**Defend the Allied War Documents."
+		wm_objective_allied_desc		2	"Primary Objective:**Stop the Axis from transmitting the Allied War Documents."
+		wm_objective_allied_desc		3	"Secondary Objective:**Do not let the Axis destroy the Service Door."
+		wm_objective_allied_desc		4	"Secondary Objective:**Do not let the Axis destroy the Fortress Wall."
+		wm_objective_allied_desc		5	"Secondary Objective:**Hold the Shipping Halls."
+
+		// Videos and Shots
+
+		wm_objective_image			1	"gfx/2d/mp_objectives/ice_obj_1.tga"
+		wm_objective_image			2	"gfx/2d/mp_objectives/ice_obj_2.tga"
+		wm_objective_image			3	"gfx/2d/mp_objectives/ice_obj_3.tga"
+		wm_objective_image			4	"gfx/2d/mp_objectives/ice_obj_4.tga"
+		wm_objective_image			5	"gfx/2d/mp_objectives/checkpoint_obj.tga"
+
+		// SHORT DESCRIPTIONS
+
+		wm_objective_short_axis_desc	1	"Steal the Allied War Documents"
+		wm_objective_short_axis_desc	2	"Transmit the Allied War Documents"
+		wm_objective_short_axis_desc	3	"Destroy the Service Door"
+		wm_objective_short_axis_desc	4	"Destroy the Fortress Wall"
+		wm_objective_short_axis_desc	5	"Capture the Shipping Halls"
+
+		wm_objective_short_allied_desc	1	"Defend the Allied War Documents"
+		wm_objective_short_allied_desc	2	"Stop the Axis from transmitting"
+		wm_objective_short_allied_desc	3	"Defend the Service Door"
+		wm_objective_short_allied_desc	4	"Defend the Fortress Wall"
+		wm_objective_short_allied_desc	5	"Hold the Shipping Halls"
+
+		wm_overview_image			"levelshots/mp_ice.tga"
+
+		// If the round timer expires, the Nazis have won, so set the current winning team
+		// Set the round winner:  0 == AXIS, 1 == ALLIED
+		wm_setwinner 1
+
+		// Accum #1 will be the state of objective number one
+		accum 1 set 0
+		accum 2 set 0
+	}
+
+	trigger checkgame
+	{
+		accum 1 abort_if_not_equal 1
+
+		// Set the round winner:  0 == AXIS, 1 == ALLIED
+		wm_setwinner 0
+
+		// End the round
+		wm_endround
+	}
+
+	trigger allied_object_stolen
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Axis has stolen the documents (0 == AXIS, 1 == ALLIED)
+		wm_set_objective_status		1	0
+	}
+
+	trigger allied_object_returned
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Allies have returned the documents (0 == AXIS, 1 == ALLIED)
+		wm_set_objective_status		1	1
+	}
+
+	trigger axis_objective2
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Allied takes control of objective #1
+		wm_set_objective_status		2	0
+
+		// Change the variable within the script so that we can check if someone wins the round
+		accum 1 set 1
+
+		// UI pop-up to alert players
+		wm_announce	"Axis transmitted the documents!"
+
+		// Call function to check if the round has been won
+		trigger game_manager checkgame
+	}
+
+	trigger icelab_flagblue
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Allied takes control of checkpoint #1
+		wm_set_objective_status		5	-1
+
+		// Some kind of UI pop-up to alert players
+		wm_announce	"Allies reclaim the Shipping Halls!"
+	}
+
+	trigger icelab_flagred
+	{
+		// Change the objective state internally, so UI can update, etc.
+		// Axis takes control of checkpoint #1
+		wm_set_objective_status		5	0
+
+		// Some kind of UI pop-up to alert players
+		wm_announce	"Axis captures the Shipping Halls!"
+	}
+
+	trigger door_objective1
+	{
+		// Some kind of UI pop-up to alert players
+		wm_announce	"Service Door breached!"
+
+		// Change the objective state internally, so UI can update, etc.
+		wm_set_objective_status		3	0
+	}
+
+	trigger wall_objective1
+	{
+		// Some kind of UI pop-up to alert players
+		wm_announce	"Fortress Wall breached!"
+
+		// Change the objective state internally, so UI can update, etc.
+		wm_set_objective_status		4	0
+	}
+}
+
+wall_obj1 // Fortress Wall
+{
+	spawn
+	{
+	}
+
+	death
+	{
+		trigger game_manager wall_objective1
+	}
+}
+
+door_obj4 //Service Door
+{
+	spawn
+	{
+	}
+
+	death
+	{
+		trigger game_manager door_objective1
+	}
+}
+
+axis_obj02 // Axis Capture Trigger
+{
+	spawn
+	{
+	}
+
+	death
+	{
+		trigger game_manager axis_objective2
+	}
+}
+
+flag_respawn_obj
+{
+	trigger axis_capture
+	{
+		trigger game_manager icelab_flagred
+	}
+
+	trigger allied_capture
+	{
+		trigger game_manager icelab_flagblue
+	}
+}
+
+// OBJ to REMOVE
+
+cp_window1
+{
+	spawn
+	{
+		remove
+	}
+}
+
+cp_window2
+{
+	spawn
+	{
+		remove
+	}
+}
+
+cp_window3
+{
+	spawn
+	{
+		remove
+	}
+}
+
+cp_wall1
+{
+	spawn
+	{
+		remove
+	}
+}
+
+cp_wall2
+{
+	spawn
+	{
+		remove
+	}
+}
+
+cp_wall3
+{
+	spawn
+	{
+		remove
+	}
+}
+
+
+checkpoint01
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint02
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint03
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint04
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint05
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint01_base
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint02_base
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint03_base
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint04_base
+{
+	spawn
+	{
+		remove
+	}
+}
+
+checkpoint05_base
+{
+	spawn
+	{
+		remove
+	}
+}

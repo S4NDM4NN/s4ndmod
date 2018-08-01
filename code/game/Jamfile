@@ -1,0 +1,23 @@
+# The server library.
+
+project game
+	: requirements <define>GAMEDLL
+	: requirements <define>OMNIBOT
+#	: requirements <define>GLOBALSTATS
+	: requirements <variant>debug:<define>DEBUG
+	: requirements <include>Omnibot/Common
+	: requirements <include>Omnibot/rtcw	
+	;
+
+SOURCES = [ glob bg_*.c ]
+		  [ glob g_*.c ]
+		  [ glob S4ND_*.c ]
+		  [ glob g_*.cpp ]
+		  [ glob Omnibot/Common/BotLoadLibrary.cpp ]
+		  q_math.c
+		  q_shared.c
+		  md5.c
+		;
+
+lib qagame.mp.i386 : $(SOURCES) ..//dl_lib : <toolset>gcc:<cflags>-w <cflags>-DNO_BOT_SUPPORT <cflags>-fno-strict-aliasing ;
+

@@ -1,0 +1,116 @@
+OSP for Wolfenstein - OSP Client Command Reference
+==================================================
+Version: 0.9
+Date:    30 Dec 03
+Contact: rhea@OrangeSmoothie.org
+Site:    http://www.OrangeSmoothie.org
+
+
+Overview:
+---------
+This document describes all OSP-specific commands and voting options.
+For OSP-specific client settings. please see: osp-wolf-ClientReadme.txt
+
+
+Note:
+-----
+Demo commands are broken out in its own document:
+		osp-wolf-DemoControls.txt
+
+
+Commands:
+---------
++wstats          Overlay on the hud showing current weapon stats (or the player you
+                 are currently following as a spectator)
++wtopshots       Overlay on the hud showing the best accuracies
+?                Gives a list of OSP-specific commands
+autorecord       Creates a demo with a consistent naming scheme
+autoscreenshot   Creates a screenshot with a consistent naming scheme
+bottomshots      [weapon_id]: Shows the worst accuracies for all weapons.  If a
+                 weapon_id is specified, then all player accuracies for the weapon
+                 are given.
+callvote         <params>: Calls a vote
+commands         Gives a list of OSP-specific commands
+currenttime      Displays current local time
+follow           <player_ID|allies|axis>: Spectates a particular player or team
+ignore           <player_ID|axis|allies|specs|all> Sets a chat ignore on a player/team/all
+                    - no <player_ID> gives usage + current ignore list
+                    - <player_ID> of -1 means ignore all
+ignore_remove    <player_ID|axis|allies|specs|all> Removes chat ignore on a player/team/all
+                    - <player_ID> of -1 removes all ignores
+lock             Locks a player's team to prevent others from joining
+mvallies         Adds all players on the Allies team to the MV list
+mvaxis           Adds all players on the Axis team to the MV list
+mvall            Adds all players to the MV list
+mvd              Adds all players to the MV list and begins recording
+mvnone           Removes all active MV clients
+notready         Sets your status to "not ready" to start a match
+pause            Allows a team to pause a match
+players          Lists all active players and their IDs/information
+ready            Sets your status to "ready" to start a match
+readyteam        Sets your whole team to "ready" status
+ref              <password>: Become a referee (admin access)
+say_teamnl       Sends a message to your team without prepended location information
+scores           Displays current match stat info
+specinvite       <player_id>: Invites a player to spectate your spec-locked team
+speclock         Locks a player's team from spectators
+specunlock       Unlocks a player's team from spectators
+stats            [player_ID]: Shows weapon accuracy stats for a player
+statsall         Shows weapon accuracy stats for all players
+statsdump        Saves current weapon/game stats to a .txt file in the stats/ dir
+team             <b|r|s|none>: Joins a team (b = allies, r = axis, s = spectator)
+timein           Unpauses a match (if initiated by the issuing team)
+timeout          Allows a team to pause a match
+topshots         [weapon_id]: Shows the best accuracies for all weapons.  If a
+                 weapon_id is specified, then all player accuracies for the weapon
+                 are given.
+unlock           Unlocks a player's team, allowing others to join
+unpause          Unpauses a match (if initiated by the issuing team)
+
+
+Referee Commands:
+-----------------
+These commands are specific to the referee
+(the console can also issue these commands):
+
+abort      - Aborts a match in progress
+allready   - Readies all players in the game
+lock       - Locks both teams
+pause      - Pauses the match
+putallies  - <p_id> puts a player on the Allies team
+putaxis    - <p_id> puts a player on the Axis team
+remove     - <p_id> removes a player from a team
+restart    - Aborts a match in progress
+speclock   - Locks both teams from spectators
+specunlock - Unlocks both teams from spectators
+unlock     - Unlocks both teams
+unpause    - Unpauses a paused match
+
+[Note: The referee can also issue any vote and it will automatically pass.
+       Conversely, a referee voting "no" on an active vote will force a
+       vote to fail.]
+
+
+Voting Options:
+---------------
+Mode  Command          Options    Info
+''''' '''''''''''''''' '''''''''' '''''''''''''''''''''''''''''''''''''''''''
+CTF   capturelimit     <value>     Changes the current Capturelimit
+ALL   centerview       <0|1>       Toggle allowing clients to use the "centerview" command
+ALL   comp             NONE        Loads standard competition settings for the current mode
+ALL   fraglimit        <value>     Changes the current fraglimit
+ALL   gametype         <value>     Changes the current gametype
+ALL   kick             <p_id>      Attempts to kick player from server
+ALL   map              <mapname>   Votes for a new map to be loaded
+ALL   map_restart      NONE        Restarts the current map
+ALL   mutespecs        NONE        Mutes in-game spectator chat
+ALL   nextmap          NONE        Loads the next map in the map queue
+ALL   pub              NONE        Loads standard public settings for the current mode
+ALL   referee          <p_id>      Elects a player to have admin abilities
+ALL   start_match      NONE        Forces match to start
+ALL   shuffleteams     NONE        Randomly place active players on each team
+ALL   swapteams        NONE        Switch the players on each team
+ALL   teamdamage       <0|1>       Toggles ability to hurt teammates
+ALL   timelimit        <value>     Changes the current timelimit
+ALL   unreferee        <p_id>      Elects a player to have admin abilities removed
+ALL   warmupfire       NONE        Specifies if players can inflict/receive damage during warmup

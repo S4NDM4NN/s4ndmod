@@ -1,0 +1,266 @@
+//
+//Brush Scripting
+//Map: mp_ctfmultidemo
+// by SCDS_reyalP hellsownpuppy@yahoo.com
+//
+
+game_manager
+{
+	spawn
+	{
+		// Set scenario information
+
+		wm_mapdescription			"CTF multiple demo. First team to capture the enemy locknar 3 times wins. NOTE: This is a scripting demonstration only. See readme_mp_ctfmultidemo.txt for more information."
+		wm_axis_respawntime		15
+		wm_allied_respawntime		15
+
+		wm_set_round_timelimit	10
+
+		wm_number_of_objectives		6
+
+		// Allies control all objectives at the start (0 == AXIS, 1 == ALLIED)
+		wm_objective_allied_desc	1	"Capture the enemy locknar"
+		wm_objective_axis_desc		1	"Defend your locknar"
+		wm_objective_allied_desc	2	"Capture the enemy locknar"
+		wm_objective_axis_desc		2	"Defend your locknar"
+		wm_objective_allied_desc	3	"Capture the enemy locknar"
+		wm_objective_axis_desc		3	"Defend your locknar"
+		wm_objective_allied_desc	4	"Defend your locknar"
+		wm_objective_axis_desc		4	"Capture the enemy locknar"
+		wm_objective_allied_desc	5	"Defend your locknar"
+		wm_objective_axis_desc		5	"Capture the enemy locknar"
+		wm_objective_allied_desc	6	"Defend your locknar"
+		wm_objective_axis_desc		6	"Capture the enemy locknar"
+		// SHORT DESCRIPTIONS
+		wm_objective_short_allied_desc	1	"Capture the enemy locknar"
+		wm_objective_short_axis_desc	1	"Defend your locknar"
+		wm_objective_short_allied_desc	2	"Capture the enemy locknar"
+		wm_objective_short_axis_desc	2	"Defend your locknar"
+		wm_objective_short_allied_desc	3	"Capture the enemy locknar"
+		wm_objective_short_axis_desc	3	"Defend your locknar"
+		wm_objective_short_allied_desc	4	"Defend your locknar"
+		wm_objective_short_axis_desc	4	"Capture the enemy locknar"
+		wm_objective_short_allied_desc	5	"Defend your locknar"
+		wm_objective_short_axis_desc	5	"Capture the enemy locknar"
+		wm_objective_short_allied_desc	6	"Defend your locknar"
+		wm_objective_short_axis_desc	6	"Capture the enemy locknar"
+
+		wm_overview_image			"levelshots/mp_ctfmultidemo.jpg"
+//		wm_objective_image			1	"gfx/2d/kothtest/objective.jpg"
+
+		wm_set_objective_status		1	0	//axis flag 1
+		wm_set_objective_status		2	0	//axis flag 2
+		wm_set_objective_status		3	0	//axis flag 3
+		wm_set_objective_status		4	1	//allies flag 1
+		wm_set_objective_status		5	1	//allies flag 2
+		wm_set_objective_status		6	1	//allies flag 3
+// accum 0 holds status of each flag as a bit
+// capped = set, not capped = reset
+		accum 0 set 0
+
+		// If the round timer expires, no one has won
+		// Set the round winner:  0 == AXIS, 1 == ALLIED
+		wm_setwinner -1
+
+	}
+
+	trigger allies_cap1
+	{
+		//axis flag 1
+		wm_set_objective_status		1	1
+		accum 0 bitset 1
+		trigger allies_flag_c1 squish
+		trigger game_manager allies_check
+	}
+
+	trigger allies_cap2
+	{
+		//axis flag 2
+		wm_set_objective_status		2	1
+		accum 0 bitset 2
+		trigger allies_flag_c2 squish
+		trigger game_manager allies_check
+	}
+
+	trigger allies_cap3
+	{
+		//axis flag 3
+		wm_set_objective_status		3	1
+		accum 0 bitset 3
+		trigger allies_flag_c3 squish
+		trigger game_manager allies_check
+	}
+
+	trigger allies_check
+	{
+		wm_announce "Allies capture an axis locknar"
+		accum 0 abort_if_not_bitset 1
+		accum 0 abort_if_not_bitset 2
+		accum 0 abort_if_not_bitset 3
+		wm_setwinner 1
+		wm_endround
+	}
+
+	trigger axis_cap1
+	{
+		//allies flag 1
+		wm_set_objective_status		4	0
+		accum 0 bitset 4
+		trigger axis_flag_c1 squish 
+		trigger game_manager axis_check
+	}
+
+	trigger axis_cap2
+	{
+		//allies flag 2
+		wm_set_objective_status		5	0
+		accum 0 bitset 5
+		trigger axis_flag_c2 squish
+		trigger game_manager axis_check
+	}
+
+	trigger axis_cap3
+	{
+		//allies flag 3
+		wm_set_objective_status		6	0
+		accum 0 bitset 6
+		trigger axis_flag_c3 squish
+		trigger game_manager axis_check
+	}
+
+	trigger axis_check
+	{
+		wm_announce "Axis capture an allies locknar"
+		accum 0 abort_if_not_bitset 4
+		accum 0 abort_if_not_bitset 5
+		accum 0 abort_if_not_bitset 6
+		wm_setwinner 0
+		wm_endround
+	}
+}
+
+//allies capture slot 1
+allies_flag1
+{
+	remove{}
+}
+
+//allies capture slot 2
+allies_flag2
+{
+	spawn
+	{
+	}
+
+	death
+	{
+		trigger game_manager allies_cap2
+	}
+}
+
+//allies capture slot 3
+allies_flag3
+{
+	spawn
+	{
+	}
+
+	death
+	{
+		trigger game_manager allies_cap3
+	}
+}
+
+// allies crusher 1
+allies_flag_c1
+{
+	trigger squish
+	{
+		gotomarker allies_flag_p1 400
+	}
+}
+
+// allies crusher 2
+allies_flag_c2
+{
+	trigger squish
+	{
+		gotomarker allies_flag_p2 400
+	}
+}
+
+// allies crusher 3
+allies_flag_c3
+{
+	trigger squish
+	{
+		gotomarker allies_flag_p3 400
+	}
+}
+
+//axis capture slot 1
+axis_flag1
+{
+	spawn
+	{
+	}
+
+	death
+	{
+		trigger game_manager axis_cap1
+	}
+}
+
+//axis capture slot 2
+axis_flag2
+{
+	spawn
+	{
+	}
+
+	death
+	{
+		trigger game_manager axis_cap2
+	}
+}
+
+//axis capture slot 3
+axis_flag3
+{
+	spawn
+	{
+	}
+
+	death
+	{
+		trigger game_manager axis_cap3
+	}
+}
+
+// axis crusher 1
+axis_flag_c1
+{
+	trigger squish
+	{
+		gotomarker axis_flag_p1 400
+	}
+}
+
+// axis crusher 2
+axis_flag_c2
+{
+	trigger squish
+	{
+		gotomarker axis_flag_p2 400
+	}
+}
+
+// axis crusher 3
+axis_flag_c3
+{
+	trigger squish
+	{
+		gotomarker axis_flag_p3 400
+	}
+}
+

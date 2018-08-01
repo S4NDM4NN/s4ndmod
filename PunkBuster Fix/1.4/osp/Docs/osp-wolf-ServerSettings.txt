@@ -1,0 +1,142 @@
+OSP for Wolfenstein - Server Settings
+=====================================
+Version: 0.9
+Date:    30 Dec 03
+Contact: rhea@OrangeSmoothie.org
+Site:    http://www.OrangeSmoothie.org
+
+
+Overview:
+---------
+This document describes all server-side settings.  For OSP-specific
+commands, please see: osp-wolf-Commands.txt
+
+
+Settings:
+---------
+g_doWarmup <0|1>  (default = 1)
+    * 0 - Normal warmup semantics
+      1 - Players must "ready" to begin a match
+
+g_spectatorInactivity  // <seconds, 0 disables> - Inactivity timer for spectators
+match_latejoin         // <0|1> - Whether clients can join a match in progress.
+match_minplayers       // <value> - Minimum # of players needed to start the match.
+match_mutespecs        // <0|1> - Whether spectators can chat during a match in progress.
+match_readypercent     // <1-99> - Player "ready" threshold.
+match_timeoutcount     // <value> - # of timeouts that can be called by each side per match.
+match_timeoutlength    // <value> - Duration (in seconds) of timeouts.
+match_warmupfire;      // <0|1> - Whether clients can inflict/receive damage during warmup.
+ref_password           // <string> - Password to enable referee status: "none" means disabled.
+server_allowCenterview // <0|1> - Togglae to allow clients to use the centerview command.
+server_autoconfig      // <0|1|2> Server loads no(0)/comp(1)/pub(2) settings on startup (based
+                                  on current g_gametype)
+                                  (Note: this means some settings will "reset" to selected values)
+server_motd[0-7]       // <string> - Specifies optional window with server Message Of The Day while
+                                     players connect.  Up to 8 lines (0-7) can be specified.
+team_maxplayers        // <value> - Max players per team.
+team_maxPanzers        // <-1-X> - Specifies # of active panzers allowed per team.
+                                   -1 signifies no limit, 0 means no panzers allowed,
+                                   anything higher signifies # of active panzers.
+team_nocontrols        // <0|1> - Disables captain/team cmds/autolocking mechanisms.
+vote_limit             // <0-X> - Max # of votes allowed for a map (non-ref)
+vote_percent           // <1-100> - Percentage of accepting clients for a vote to pass.
+
+
+// All settings below are either 0 (disabled) or 1 (enabled)
+// ---------------------------------------------------------
+vote_allow_capturelimit // Capturelimit voting allowed?
+vote_allow_centerview   // Centerview command allowed?
+vote_allow_comp         // Competition setting voting allowed?
+vote_allow_fraglimit    // Fraglimit voting allowed?
+vote_allow_gametype     // Gametype voting allowed?
+vote_allow_kick         // Kick player voting allowed?
+vote_allow_map          // Map voting allowed?
+vote_allow_mutespecs    // Spectator mute voting allowed?
+vote_allow_nextmap	// Nextmap voting allowed?
+vote_allow_pub		// Public setting voting allowed?
+vote_allow_referee      // Referee voting allowed?
+vote_allow_shuffleteams	// Team shuffle voting allowed?
+vote_allow_swapteams	// Team swap voting allowed?
+vote_allow_teamdamage   // Teamdamage voting allowed?
+vote_allow_timelimit    // Timelimit voting allowed?
+vote_allow_warmupfire;  // Weapon fire during warmup voting allowed?
+
+
+Forced settings for "comp" mode:
+--------------------------------
+dmflags                 0
+g_allowVote             1
+g_altStopwatchMode      0
+g_complaintlimit        999
+g_doWarmup              1
+g_engineerChargeTime    30000
+g_forcerespawn          0
+g_friendlyFire          1
+g_gravity               800
+g_inactivity            0
+g_knockback             1000
+g_LTChargeTime          40000
+g_maxlives              0
+g_medicChargeTime       45000
+g_quadfactor            3
+g_soldierChargeTime     20000
+g_speed                 320
+g_syncronousClients     0
+g_teamforcebalance      0
+g_userAlliedRespawnTime 0
+g_userAxisRespawnTime   0
+g_voicechatsallowed     50
+g_warmup                10
+match_latejoin          0
+match_mutespecs         0
+match_readypercent      100
+match_timeoutcount      1
+match_timeoutlength     180
+match_warmupfire        1
+pmove_fixed             0
+sv_allowDownload        1
+sv_floodProtect         0
+sv_fps                  20
+sv_screenshake          1
+team_maxplayers         10
+team_nocontrols         0
+
+
+Forced settings for "pub" mode:
+-------------------------------
+dmflags                 0
+g_allowVote             1
+g_altStopwatchMode      0
+g_complaintlimit        5
+g_doWarmup              0
+g_engineerChargeTime    30000
+g_forcerespawn          0
+g_friendlyFire          1
+g_gravity               800
+g_inactivity            0
+g_knockback             1000
+g_LTChargeTime          40000
+g_maxlives              0
+g_medicChargeTime       45000
+g_quadfactor            3
+g_soldierChargeTime     20000
+g_speed                 320
+g_syncronousClients     0
+g_teamforcebalance      1
+g_userAlliedRespawnTime 0
+g_userAxisRespawnTime   0
+g_voicechatsallowed     50
+g_warmup                60
+pmove_fixed             0
+match_latejoin          1
+match_mutespecs         1
+match_readypercent      100
+match_timeoutcount      0
+match_timeoutlength     180
+match_warmupfire        0
+sv_allowDownload        1
+sv_floodProtect         0
+sv_fps                  20
+sv_screenshake          1
+team_maxplayers         0
+team_nocontrols         1

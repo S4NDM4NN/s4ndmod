@@ -1,0 +1,230 @@
+//
+//Brush Scripting
+//Map: Xlabs
+//Last edited by: Agent
+//
+
+// All of the levers used for the electric doors.
+lever1
+	// I start with electric OFF
+{
+	spawn
+	{
+		playsound xlabs_switch
+		faceangles -90 0 0 500
+		faceangles -180 0 0 500
+		alertentity lever1_electric
+	}
+}
+
+lever2
+	// I start with electric ON
+{
+	spawn
+	{
+		faceangles 0 0 90 500
+		faceangles 0 0 180 500
+	}
+}
+
+lever3
+	// I start with electric ON
+{
+	spawn
+	{
+		faceangles 0 0 90 500
+		faceangles 0 0 180 500
+	}
+}
+
+lever4
+	// I start with electric ON
+{
+	spawn
+	{
+		faceangles 0 0 90 500
+		faceangles 0 0 180 500
+	}
+}
+
+lever5
+	// I start with electric ON
+{
+	spawn
+	{
+		faceangles 90 0 0 500
+		faceangles 180 0 0 500
+	}
+}
+
+lever6
+	// I start with electric OFF
+{
+	spawn
+	{
+		faceangles -180 0 0 500
+		playsound xlabs_switch
+		faceangles -90 0 0 500
+		faceangles 0 0 0 500
+		alertentity lever6_electric
+	}
+}
+
+counter1
+{
+	spawn
+	{
+		remove
+	}
+}
+
+counter2
+{
+	spawn
+	{
+		remove
+	}
+}
+
+table1
+{
+	spawn
+	{
+	}
+}
+
+cage_door1
+{
+	spawn
+	{
+		trigger cage_door1 up
+	}
+
+	trigger up
+	{
+		alertentity cage1_light
+		playsound sound/movers/doors/door3_loopo.wav looping
+		gotomarker cd1spot1 20 wait
+		stopsound
+		alertentity cage1_light
+	}
+}
+
+cage_door2
+{
+	spawn
+	{
+		trigger cage_door2 up
+	}
+
+	trigger up
+	{
+		playsound sound/movers/doors/door3_loopo.wav looping
+		gotomarker cd2spot1 20 wait
+		stopsound
+		alertentity cage2_light
+	}
+}
+
+cage_door3
+{
+	spawn
+	{
+		trigger cage_door3 up
+	}
+
+	trigger up
+	{
+		playsound sound/movers/doors/door3.loopo.wav looping
+		gotomarker cd3spot1 20 wait
+		stopsound
+		alertentity cage3_light
+	}
+}
+
+scdoor1
+{
+	spawn
+	{
+		faceangles 0 90 0 5
+		gotomarker scdoor1spot1 1000 wait
+		alertentity scdoor
+		trigger lever3 toggle
+		gotomarker scdoor1spot2 1000 wait
+	}
+}
+
+bigdoor1
+{
+	spawn
+	{
+	}
+
+	trigger open
+	{
+		alertentity big_door1_sound
+		playsound sound/scenaric/assault/big_gate1.wav
+		wait 400
+		playsound sound/scenaric/assault/big_gate2.wav looping forever
+		gotomarker bigdoor1spot1 10 wait
+		stopsound
+		playsound sound/scenaric/assault/big_gate3.wav
+		alertentity big_door1_sound
+	}
+}
+
+bigdoor2
+{
+	spawn
+	{
+	}
+
+	trigger open
+	{
+		alertentity big_door2_sound
+		playsound sound/scenaric/assault/big_gate1.wav
+		wait 400
+		playsound sound/scenaric/assault/big_gate2.wav looping forever
+		gotomarker bigdoor2spot1 10 wait
+		stopsound
+		playsound sound/scenaric/assault/big_gate3.wav
+		alertentity big_door2_sound
+	}
+}
+
+big_door1_lever
+{
+	spawn
+	{
+		faceangles -75 0 0 1000
+		trigger big_door1_lever open
+	}
+
+	trigger open
+	{
+		faceangles 20 0 0 1000
+		alertentity big_door1
+		alertentity big_door1_sound
+		wait 26000 0
+		alertentity big_door1_sound
+
+	}
+}
+
+big_door2_lever
+{
+	spawn
+	{
+		trigger big_door2_lever open
+	}
+
+	trigger open
+	{
+		faceangles -90 0 0 500
+		faceangles -180 0 0 500
+		alertentity big_door2
+		alertentity big_door2_sound
+		wait 26000 0
+		alertentity big_door2_sound
+	}
+}

@@ -1,0 +1,545 @@
+//
+//BRUSH scripting
+//Map chateau_90
+//10/11/01
+//last edited by jeremy
+
+
+fireplace
+{
+	spawn
+	{
+	}
+
+	trigger						
+	{
+	}
+}
+
+treasure1							// This will open the secret door...
+{
+	spawn
+	{
+	}
+
+	trigger rotate1
+	{
+		gotomarker t1spot1 5 wait 
+		gotomarker t1spot2 2 wait
+		wait 3000
+		//faceangles 0 0 -20 300
+		//print TREASURE BUTTON, STILL under construction
+		wait 2000
+		gotomarker t1spot3 5 wait
+		//faceangles 0 0 -20 400
+		trigger treasure rotate1
+	}
+}
+
+statue1
+{
+	spawn
+	{
+		wait 100
+		trigger statue1 st1_fallover1
+	}
+
+	trigger st1_fallover1
+	{
+		faceangles 0 0 -15 200
+		faceangles 0 0 -30 300
+		faceangles 0 0 -45 50
+		trigger head1 fall1
+		faceangles 0 0 -65 20
+		faceangles 0 0 -80 5
+		faceangles 0 0 -90 1
+		//gotomarker st1spot1 4000 wait
+	}
+}
+
+statue2
+{
+	spawn
+	{
+		wait 100
+		trigger statue2 st2_fallover1
+	}
+
+	trigger st2_fallover1
+	{
+		faceangles 0 -15 0 200
+		faceangles 0 -30 0 300
+		faceangles 0 -45 0 50
+		//trigger head1 fall1
+		faceangles 0 -65 0 20
+		faceangles 0 -80 0 5
+		faceangles 0 -90 0 1
+	}
+}
+
+fireplace_wall1
+{
+	spawn
+	{
+	}
+
+	trigger wall_move1			// Opening... 
+	{
+		gotomarker w1spot1 5 wait
+		gotomarker w1spot2 5 wait
+		gotomarker w1spot3 5 wait
+		//gotomarker w1spot4 5 deccel wait
+		trigger fireplace1 rotate1a
+	}
+
+
+	trigger wall_move2			// Closing...
+	{
+		gotomarker w1spot3 5 wait
+		gotomarker w1spot2 5 wait
+		gotomarker w1spot1 5 wait
+		//gotomarker w1spot4 5 deccel wait
+		//trigger fireplace1 rotate1a
+	}
+}
+
+fp_switch
+{
+	spawn
+	{
+		accum 0 bitreset 0 
+		accum 1 set 0
+		accum 2 set 0
+		accum 3 set 0	
+	}
+
+	trigger fireplace_open_checkin
+	{
+		accum 0 bitset 5
+		alertentity hide_fire_hint
+	}
+
+	trigger fireplace_close_checkin
+	{
+		accum 0 bitreset 5
+	}
+
+	trigger choose_function
+	{
+		playsound sound/movers/switches/switch.wav
+		trigger fp_switch open
+		wait 5
+		trigger fp_switch close
+	}
+
+	trigger open 
+	{
+		accum 0 abort_if_bitset 5
+		faceangles 20 0 0 500
+		resetscript
+		trigger fireplace1 rotate1	// the fireplace
+		trigger fpt rotate1	//holding tools
+		trigger fptb rotate1		// tool	
+		playsound sound/movers/switches/switch.wav
+	}
+
+	trigger close
+	{
+		accum 0 abort_if_not_bitset 5
+		faceangles 340 0 0 500
+		resetscript
+		trigger fireplace1 close1	// the fireplace
+		trigger fpt close1	//holding tools
+		trigger fptb close1		// tool
+		playsound sound/movers/switches/switch.wav
+	}
+}
+
+fireplace1
+{
+	spawn
+	{
+		accum 0 bitreset 0
+		accum 1 set 0
+		accum 2 set 0
+	}
+
+	trigger rotate1
+	{
+		resetscript
+//		wait 0
+		playsound sound/scenaric/chateau/fplace_begin.wav
+		playsound sound/scenaric/chateau/fplace_end.wav looping
+		gotomarker fireplace_spot1a 20 accel wait
+		gotomarker fireplace_spot2 20 deccel wait
+		playsound sound/scenaric/chateau/door2_closeq.wav
+		stopsound
+		trigger fp_switch fireplace_open_checkin
+	//	HAVE IT END HERE--------------	
+
+	}
+
+	trigger close1
+	{
+		wait 2
+//		gotomarker fireplace_spot1 20
+		playsound sound/scenaric/chateau/fplace_begin.wav
+		playsound sound/scenaric/chateau/fplace_loop.wav looping
+		gotomarker fireplace_spot2a 20 accel wait
+		gotomarker fireplace_spot1 20 deccel wait
+		playsound sound/scenaric/chateau/ fplace_end.wav 
+		stopsound
+		trigger fp_switch fireplace_close_checkin
+	}
+
+	trigger rotate1a
+	{
+		//accum 0 abort_if_not_equal 0
+		resetscript
+	//	trigger fpt rotate1
+		faceangles 0 -5 0 600
+		faceangles 0 -10 0 700
+		wait 1000
+		faceangles 0 -80 0 7000
+		faceangles 0 -90 0 3000
+
+//		HAVE IT END HERE--------------
+		
+//		wait 5000
+//		faceangles 0 -80 0 3000
+//		faceangles 0 -10 0 7000
+//		faceangles 0 -5 0 600
+//		faceangles 0 0 0 500
+//		trigger fireplace_wall1 wall_move2
+
+
+		//wait 2500		test
+		//faceangles 0 -170 0 7000 test
+		//faceangles 0 -180 0 3000 test
+		//accum 0 set 1
+		//accum 1 set 1	// Enable button
+	}
+
+	trigger rotate2a
+	{
+		//accum 0 abort_if_not_equal 1
+		resetscript
+		faceangles 0 360 0 7000
+		//accum 0 set 0
+		//accum 1 set 1
+	}
+}
+
+fpt			// HOlding tools
+{
+	spawn
+	{
+	}
+
+	trigger rotate1
+	{
+		wait 2
+//		gotomarker fireplace_spot2 20
+		gotomarker fireplace_spot1a 20 accel wait
+		gotomarker fireplace_spot2 20 deccel wait
+	//	faceangles 0 -80 0 3000
+	//	faceangles 0 -10 0 7000
+	//	faceangles 0 -5 0 600
+	//	faceangles 0 0 0 500		
+	}
+	trigger close1
+	{
+		wait 2
+//		gotomarker fireplace_spot1 20
+		gotomarker fireplace_spot2a 20 accel wait
+		gotomarker fireplace_spot1 20 deccel wait
+	}
+}
+
+fpta			// HOlding tools
+{
+	spawn
+	{
+	}
+
+	trigger rotate1
+	{
+		wait 2
+//		gotomarker fireplace_spot2 20	
+		gotomarker fireplace_spot1a 20 accel wait
+		gotomarker fireplace_spot2 20 deccel wait	
+	}
+
+	trigger close1
+	{
+		wait 2
+//		gotomarker fireplace_spot1 20
+		gotomarker fireplace_spot2a 20 accel wait
+		gotomarker fireplace_spot1 20 deccel wait
+	}
+
+}
+
+fptb			// tool itself
+{
+	spawn
+	{
+		accum 0 bitreset 0
+		accum 1 set 0
+		accum 2 set 0
+	}
+
+	trigger pull		// This is it being pulled then closed
+	{
+		accum 0 abort_if_bitset 1
+		accum 0 bitset 1
+		playsound sound/movers/switches/switch.wav
+		playanim 0 18 3000
+//		faceangles 10 0 0 300
+//		wait 2000
+//		faceangles 0 0 0 300 
+		wait 2000
+		trigger fireplace1 rotate1	// the fireplace
+		trigger fpt rotate1	//holding tools
+		trigger fptb rotate1		// tool
+	//	trigger fpta rotate1
+	}
+
+	trigger rotate1
+	{
+		wait 2
+//		gotomarker fireplace_spot2 20
+		gotomarker fireplace_spot1a 20 accel wait
+		gotomarker fireplace_spot2 20 deccel wait		
+	}
+
+	trigger close1
+	{
+		wait 2
+//		gotomarker fireplace_spot1 20
+		gotomarker fireplace_spot2a 20 accel wait
+		gotomarker fireplace_spot1 20 deccel wait
+		accum 0 bitreset 1
+	}
+}
+
+last_table
+{
+	spawn
+	{
+		wait 100
+		trigger last_table fall1
+	}
+
+	trigger fall1
+	{
+//		mu_fade 0 3000 
+//		mu_start sound/music/m_situation	
+		alertentity last_table_clip
+		faceangles 275 0 0 5
+	}
+}
+
+checker2
+{
+	spawn
+	{
+	}
+
+	trigger
+	{
+	}
+}
+
+smalltable1
+{
+	spawn
+	{
+		accum 0 bitreset 0	// Used to "check" whether the vase is alive or not. "bitreset=alive" "bitset=dead"
+	}
+
+	trigger 0bitset0
+	{
+		accum 0 bitset 0
+	}
+
+	death
+	{
+	//	accum 0 abort_if_bitset 0 // If vase1 is dead, then do not continue.
+	//	trigger vase1 fall1	// Triggers vase1 to fall.
+	//	alertentity small_table1_destroyed	// Triggers the small table1 debris
+	}
+}
+
+vase1
+{
+	spawn
+	{
+		accum 0 bitreset 0	// Used so that when the "target_kill" is triggered, the death event for this will not trigger vase1_blow1
+		trigger vase1 fall1
+	}
+
+	trigger fall1	// This will trigger if smalltable1 is shot and destroyed while vase1 is still on it.
+	{
+		gotomarker v1spot1 500
+		faceangles 0 0 10 gototime
+		accum 0 bitset 0 // Used so that when the "target_kill" is triggered, the death event for this will not trigger vase1_blow1
+		gotomarker v1spot2 100
+		trigger checker3 vase1_blow2
+	}
+
+	death
+	{
+	}
+}
+
+checker3	// NOTE: ONLY REASON WE MUST USE CHECKER3 IS SO THAT WHEN THE VASE1_BLOW2 IS TRIGGERED, IT WON'T CRASH WHEN THE TARGET KILL IS ACTIVATED. 'CAUSE IF THE TARGET KILL WAS ACTIVATED INSIDE OF THE VASE1 SCRIPT, THEN IT WOULD CRASH.
+{
+	spawn
+	{
+		remove
+	}
+}
+barrell1
+{
+	spawn
+	{
+		//trigger barrell1 fall1
+	}
+
+	trigger fall1
+	{
+		wait 65
+		gotomarker barrell1_spot1 25
+		faceangles 0 0 15 gototime
+		gotomarker barrell1_spot2 25 wait
+		wait 895	
+		gotomarker barrell1_spot5 500 accel
+		faceangles 0 0 60 gototime
+		alertentity barrell1_func
+		alertentity barrell1_alert
+		alertentity barrell1_trigger
+		alertentity kill_barrell1
+	}
+}
+
+barrell2
+{
+	spawn
+	{
+		//trigger barrell2 fall1
+	}
+
+	trigger fall1
+	{
+		wait 65
+		gotomarker barrell2_spot1 75 
+		faceangles 0 0 15 gototime
+		gotomarker barrell2_spot2 75 wait
+		wait 890		
+		gotomarker barrell2_spot5 500 accel 
+		faceangles 0 0 85 gototime
+		alertentity barrell2_func
+		alertentity barrell2_alert
+		alertentity barrell2_trigger
+		alertentity kill_barrell2
+	}
+}
+
+barrell3
+{
+	spawn
+	{
+	}
+
+	trigger fall1
+	{
+		wait 65
+		gotomarker barrell3_spot1 50 
+		faceangles 0 0 15 gototime
+		gotomarker barrell3_spot2 50 wait
+		wait 900
+		//faceangles 0 0 17 200
+		//gotomarker barrell3_spot3 150  
+		//faceangles 0 0 20 gototime
+		//gotomarker barrell3_spot4 150  
+		//faceangles 0 0 60 gototime 		
+		gotomarker barrell3_spot5 500 accel
+		faceangles 0 0 80 gototime
+		alertentity barrell3_func
+		alertentity barrell3_func_explode_now
+		trigger checker3 turn_hurt_on
+		alertentity kill_barrell3
+	}
+}
+
+shelf
+{
+	spawn
+	{
+	}
+
+	trigger fall1
+	{
+		trigger barrell3 fall1
+		trigger barrell2 fall1
+		trigger barrell1 fall1
+		faceangles 0 0 3 500
+		playsound sound/world/metalbreak.wav
+		playsound sound/movers/doors/door4_locked.wav
+		wait 700
+		faceangles 0 0 90 500 accel
+		wait 5
+		faceangles 0 0 85 500
+		wait 5
+		faceangles 0 0 83 225
+		wait 5
+		faceangles 0 0 90 175
+		wait 5
+		faceangles 0 0 87 150
+		wait 5
+		faceangles 0 0 90 100
+	}
+}
+
+
+
+hall_table
+{
+	spawn
+	{ 
+		trigger hall_table go1		//	Tip it so defenders have cover to hide behind
+	}
+
+	trigger go1     // ALERTED
+	{
+		alertentity hall_table_clip
+		gotomarker hall_table_spot1 500 wait
+		faceangles 85 270 0 5
+	}
+
+	trigger go1a
+	{
+		faceangles 85 270 0 200
+	}
+	
+}
+
+library_table
+{
+	spawn
+	{
+		trigger library_table go1	//	Tip it so defenders have cover to hide behind	
+	}
+
+	trigger go1     // ALERTED
+	{
+		faceangles 275 0 0 5
+	}
+
+	trigger go2
+	{
+		faceangles 275 0 0 200
+	}
+	
+}
