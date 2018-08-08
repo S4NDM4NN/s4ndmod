@@ -9529,8 +9529,6 @@ void Checkcvars( gentity_t *ent,char *cvar, int cvaris ) {
 }
 
 
-
-
 int muzzleflashmodel;
 void mg42_use( gentity_t * ent, gentity_t * other, gentity_t * activator ) ;
 void mg42_die( gentity_t * self, gentity_t * inflictor, gentity_t * attacker, int damage, int mod ) ;
@@ -9715,7 +9713,6 @@ void AUTOMG42_Fire_Lead( gentity_t *ent, gentity_t *activator, float spread, int
 		if ( LogAccuracyHit( traceEnt, ent ) ) {
 			ent->client->ps.persistant[PERS_ACCURACY_HITS]++;
 		}
-
 	} else {
 		// Ridah, bullet impact should reflect off surface
 		vec3_t reflect;
@@ -10006,7 +10003,7 @@ void printstats() {
 	trap_SendServerCommand( -1, "print \"^5Stats key:\n" );
 	trap_SendServerCommand( -1, "print \"^3CN  = Client Number    K = Kills         D  = Deaths\n" );
 	trap_SendServerCommand( -1, "print \"^3Tk  = Teamkills        G = Gibs          A  = Ammo given\n" );
-	trap_SendServerCommand( -1, "print \"^3DR  = Damage received  R = revives       KR = Kill Ratio\n" );
+	trap_SendServerCommand( -1, "print \"^3DR  = Damage received  R = Revives       KR = Kill Ratio\n" );
 	trap_SendServerCommand( -1, "print \"^3DG  = Damage given     H = Health given  HS = Head shots\n" );
 	trap_SendServerCommand( -1, "print \"^3ACC = Accuracy\n" );
 	trap_SendServerCommand( -1, "print \"\n" );

@@ -709,7 +709,7 @@ qboolean    ConsoleCommand( void ) {
 	}
 
 	if ( Q_stricmp( cmd, "hostnameban" ) == 0 ) {
-		Svcmd_hostnameBan_f();
+//		Svcmd_hostnameBan_f();
 		return qtrue;
 	}	
 
