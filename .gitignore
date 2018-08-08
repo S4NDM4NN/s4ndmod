@@ -3,3 +3,8 @@
 ################################################################################
 
 /code/.vs/S4NDMoD_vs2017/v15
+/bin
+/code/cgame/Debug
+/code/Debug
+/code/game/Debug
+/code/ui/Debug
